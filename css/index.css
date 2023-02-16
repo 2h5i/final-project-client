@@ -1,0 +1,22 @@
+.main-title-area {
+  padding-top: 1vw;
+  margin-bottom: 50px;
+}
+
+.main-list-area ul {
+  list-style: none;
+}
+
+.main-list-area ul li {
+  cursor: pointer;
+}
+
+.recruitment-div {
+  padding: 15px 30px;
+  border: 1px solid white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
