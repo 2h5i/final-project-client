@@ -32,13 +32,14 @@
     <meta name="generator" content="Eleventy v2.0.0" />
     <meta name="HandheldFriendly" content="true" />
     <title>Register a new account</title>
-    <link rel="stylesheet" href="css/theme.min.css" />
+    <link rel="stylesheet" href="./css/signup.css" />
+    <script defer src="./js/main.js"></script>
   </head>
 
   <body
-    class="d-flex h-100 w-100 bg-black text-white"
+  class="d-flex h-100 w-100 bg-black text-white"
     data-bs-spy="scroll"
-    data-bs-target="#navScroll"
+    data-bs-target="#navScroll" 
   >
     <div class="h-100 container-fluid">
       <div class="h-100 row d-flex align-items-stretch">
@@ -53,61 +54,50 @@
               <img src="images/logo.png" width="40px" height="40px" />
               <span class="ms-md-1 mt-1 fw-bolder me-md-5">Grasp</span>
             </a>
-          </header>
-          <main class="mb-auto col-12">
-            <h1>Register a new account - 회원 가입 페이지</h1>
+  <div class="container">
+    <div class="content">
+      <!-- HEADER -->
+      <header>
+        <h2>Sign up</h2>
+        <h3>회원가입</h3>
+      </header>
 
-            <form class="row">
-              <div class="col-12">
-                <div class="mb-3">
-                  <label for="exampleInputEmail1" class="form-label"
-                    >Email address</label
-                  >
-                  <input
-                    type="email"
-                    class="form-control form-control-lg bg-gray-800 border-dark"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                  />
-                  <div id="emailHelp" class="form-text">
-                    We'll never share your email with anyone else.
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <label for="exampleInputPassword1" class="form-label"
-                    >Password</label
-                  >
-                  <input
-                    type="password"
-                    class="form-control form-control-lg bg-gray-800 border-dark"
-                    id="exampleInputPassword1"
-                  />
-                </div>
-                <div class="mb-3 form-check py-3">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="exampleCheck1"
-                  />
-                  <label class="form-check-label" for="exampleCheck1"
-                    >If you really don´t want any newsletter
-                    <strong>check this box</strong>. Then you just agree to
-                    receive our marketing mails and product stuff. If you check
-                    this box
-                    <strong>we will not send out our newsletter</strong> to you
-                    at all...on mondays.</label
-                  >
-                </div>
-                <button type="submit" class="btn btn-white btn-xl mb-4">
-                  Submit
-                </button>
-              </div>
-            </form>
-          </main>
+      <!-- INPUT -->
+      <section>
+        <div class="info" id="info__id">
+          <div id="id-input">
+            <input class="box" type="text" placeholder="아이디 입력(6~20자)"/>
+          </div>
+          <div class="error-msg"></div>
         </div>
-
-        <div class="col-12 col-md-5 col-lg-6 col-xl-7 gradient"></div>
+        <div class="info" id="info__pw">
+          <input class="box" type="password" placeholder="비밀번호 입력 (문자, 숫자, 특수문자 포함 8~20자)"/>
+          <div class="error-msg"></div>
+        </div>
+        <div class="info" id="info__pwRe">
+          <input class="box" type="password" placeholder="비밀번호 재입력"/>
+          <div class="error-msg"></div>
+        </div>
+        <div class="info" id="info__email">
+          <input class="box" id="email-txt" type="text" placeholder="이메일 입력"/>
+          <span>@</span>
+          <input class="box" id="domain-txt" type="text"/>
+          <select class="box" id="domain-list">
+            <option value="type">직접 입력</option>
+            <option value="naver.com">naver.com</option>
+            <option value="google.com">google.com</option>
+            <option value="hanmail.net">hanmail.net</option>
+            <option value="nate.com">nate.com</option>
+            <option value="kakao.com">kakao.com</option>
+          </select>
+      </section>
+      <div id="result-fail"></div>
+      <button id="submit">가입하기</button>
+      <div class="exist">
+        <span>이미 회원이신가요?</span>
+        <a href="login.html">로그인 하러가기</a>
       </div>
     </div>
-  </body>
+  </div>
+</body>
 </html>
