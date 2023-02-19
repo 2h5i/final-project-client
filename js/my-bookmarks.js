@@ -9,7 +9,7 @@ var page = 1; // 페이지가 1부터 시작할때
 
 document.addEventListener('DOMContentLoaded', function () {
   var settings = {
-    url: 'http://localhost:8080/api/recruitment-comments/23/my-page',
+    url: 'http://localhost:8080/api/bookmarks/23/my-page',
     method: 'GET',
     timeout: 0,
     data: {
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
       size: VIEW_DATA,
     },
     "headers": {
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyYWEiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTY3Njc4MTAzMCwiaWF0IjoxNjc2Nzc3NDMwfQ.mnH63KX574kFPEx0gd_iEAW3In166ptbniJAP8oQ7kE"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyYWEiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTY3Njc4MTUyOCwiaWF0IjoxNjc2Nzc3OTI4fQ.iAISDkOzWT0ZbQfG7uD5BIxLTnsJhOp90RasmXdHQ6Q"
       },
   };
 
@@ -36,11 +36,11 @@ $('.posts-content-area').on('click', 'a', function (e) {
   page = parseInt($(this).data('page'));
 
   var settings = {
-    url: 'http://localhost:8080/api/recruitment-comments/23/my-page',
+    url: 'http://localhost:8080/api/bookmarks/23/my-page',
     method: 'GET',
     timeout: 0,
     "headers": {
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyYWEiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTY3Njc4MTAzMCwiaWF0IjoxNjc2Nzc3NDMwfQ.mnH63KX574kFPEx0gd_iEAW3In166ptbniJAP8oQ7kE"
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyYWEiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTY3Njc4MTUyOCwiaWF0IjoxNjc2Nzc3OTI4fQ.iAISDkOzWT0ZbQfG7uD5BIxLTnsJhOp90RasmXdHQ6Q"
       },
     data: {
       page: page - 1,
@@ -106,9 +106,9 @@ function pageing_list() {
 // 게시물 목록
 function board_list(data) {
   var str = '';
-  data.forEach((recruitmentcomment) => {
-    str += `<tr onclick="location.href='/recruitment-detail.html?id=${recruitmentcomment.recruitmentid}'">`;
-    str += `<td>${recruitmentcomment.content}</td>`;
+  data.forEach((bookmark) => {
+    str += `<tr onclick="location.href='/recruitment-detail.html?id=${bookmark.recruitmentid}'">`;
+    str += `<td>${bookmark.title}</td>`;
     str += '</tr>';
   });
 
