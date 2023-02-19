@@ -7,6 +7,7 @@ let TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION); // 총구역(총페이
 
 var page = 1; // 페이지가 1부터 시작할때
 
+
 document.addEventListener('DOMContentLoaded', function () {
   var settings = {
     url: 'http://localhost:8080/api/posts/23/my-page',
