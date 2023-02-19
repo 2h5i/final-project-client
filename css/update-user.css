@@ -25,9 +25,6 @@
     /* background-color: #111111; */
     padding: var(--gap);
 }
-.box-image{
-    width: 300px;
-}
 .box-contents{
     text-align: left;
     margin: auto;
