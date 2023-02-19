@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     method: 'GET',
     timeout: 0,
     "headers": {
-      "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyYWEiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTY3NjYzMzE3OCwiaWF0IjoxNjc2NjI5NTc4fQ.qEsAS6DcC5HlDqcSRo-EKgyRPzQyLhGGM1-tLuooVMM"
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyYWEiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTY3Njc3NzMwNywiaWF0IjoxNjc2NzczNzA3fQ.5D4wK-8QkzIv17v4jSfsXj4UO3R2dFZ3NDMSObAAngw"
     },
   };
 
