@@ -1,0 +1,33 @@
+.posts-title-area {
+  padding-top: 1vw;
+  margin-bottom: 50px;
+}
+
+.posts-write-button-area {
+  float: right;
+  margin-bottom: 30px;
+}
+
+/* 페이징 */
+#pagination-buttons {
+  margin: 0 auto;
+  padding: 40px 0;
+  text-align: center;
+  font-size: 0;
+}
+#pagination-buttons .current {
+  color: #00f;
+  font-weight: bold;
+}
+#pagination-buttons a {
+  display: inline-block;
+  padding: 5px;
+  border: 1px solid #000;
+  font-size: 12px;
+}
+#pagination-buttons a + a {
+  margin-left: 5px;
+}
+#pagination-buttons a.on {
+  color: #f00;
+}
