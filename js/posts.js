@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
   };
 
   $.ajax(settings).done(function (response) {
-    data = response.content;
+    const data = response.content;
 
     TOTAL_DATA = response.totalElements;
     TOTAL_PAGE = response.totalPages;
@@ -43,7 +43,7 @@ $('.posts-content-area').on('click', 'a', function (e) {
   };
 
   $.ajax(settings).done(function (response) {
-    data = response.content;
+    const data = response.content;
 
     TOTAL_DATA = response.totalElements;
     TOTAL_PAGE = response.totalPages;
