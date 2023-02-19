@@ -163,38 +163,28 @@
 
         <div class="container">
           <section class="box">
+            <form action="JoinService" method="post">
             <div class="box-contents">
                 <div class = "ponts">
-                    <p>아이디</p>
-                    <input class="form-control" id="userId" type="text" placeholder="Id" aria-label="default input example">
-                    <div class="col-auto">
-                        <span id="passwordHelpInline" class="form-text">
-                            최소 4자 이상, 10자 이하이며 a-z, 0-9 만 입력하세요.
-                        </span>
-                      </div>
                     <p>비밀번호</p>
-                    <input class="form-control" id="userpassword" type="password" placeholder="Password" aria-label="default input example">
+                    <input class="form-control" id="userPassword" type="password" placeholder="Password" aria-label="default input example" onchange="isSame()">
                     <div class="col-auto">
                         <span id="passwordHelpInline" class="form-text">
                             최소 8자 이상, 15자 이하이며 a-z, A-Z, 0-9 만 입력하세요.
                         </span>
                       </div>
                     <p>비밀번호 확인</p>
-                    <input class="form-control" type="password" placeholder="Password" aria-label="default input example">
-                    <div class="col-auto">
-                        <span id="passwordHelpInline" class="form-text">
-                          비밀번호와 동일하게 작성하세요.
-                        </span>
-                    </div>
-                    <p>이메일</p>
-                    <input class="form-control" id="userEmail" type="text" placeholder="Email" aria-label="default input example">
+                    <input class="form-control" id="userPassword2" type="password" placeholder="Password" aria-label="default input example" onchange="isSame()">
+                    <span id="same"></span>
+                
                 </div>
               <div class="buttons">
-                <button type="button" class="btn btn-primary" onclick="updateUser()">변경</button>
+                <button type="button" class="btn btn-primary" id="submit-button" onclick="updateUser()" disabled>변경</button>
                 <button type="button" class="btn btn-secondary" onclick="location.href='mypage.html'">취소</button>
               </div>
 
             </div>
+        </form>
           </section>
         </div>
 
