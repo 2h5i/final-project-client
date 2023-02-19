@@ -3,6 +3,11 @@
   margin-bottom: 50px;
 }
 
+.posts-write-button-area {
+  float: right;
+  margin-bottom: 30px;
+}
+
 /* 페이징 */
 #pagination-buttons {
   margin: 0 auto;
