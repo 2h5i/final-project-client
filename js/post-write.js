@@ -34,7 +34,7 @@ const writePost = () => {
     timeout: 0,
     headers: {
       Authorization:
-        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYWFhIiwiYXV0aCI6IkFETUlOIiwiZXhwIjoxNjc2ODEwMDczLCJpYXQiOjE2NzY4MDY0NzN9.4yFtwfCnZIswYGHuiTSFZM_-ml28YGJWm22rdfMVv2I',
+      window.localStorage.getItem('accesstoken'),
       'Content-Type': 'application/json',
     },
     data: JSON.stringify({

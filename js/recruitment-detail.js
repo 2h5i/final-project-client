@@ -160,7 +160,7 @@ const addComment = () => {
     }),
     headers: {
       Authorization:
-        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYWFhIiwiYXV0aCI6IkFETUlOIiwiZXhwIjoxNjc2Nzg2Njg5LCJpYXQiOjE2NzY3ODMwODl9.gEzFSM0kQa7Fh-LVbhQ-vYfmxWdH1jXm6x9noLrNnS4',
+      window.localStorage.getItem('accesstoken'),
       'Content-Type': 'application/json',
     },
   };

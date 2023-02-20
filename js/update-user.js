@@ -2,12 +2,11 @@ const userId = window.location.href.split('?id=')[1];
 
 document.addEventListener('DOMContentLoaded', function updateUser(){
     var settings = {
-      url: `http://localhost:8080/api/users/${userId}`,
+      url: `http://localhost:8080/api/users`,
       method: 'PUT',
       timeout: 0,
       "headers": {
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuYWRhMTIzNCIsImF1dGgiOiJVU0VSIiwiZXhwIjoxNjc2Nzk2MDM4LCJpYXQiOjE2NzY3OTI0Mzh9.EWz6nbXpwjIdU55HKm-bAuTuIt6pyOPl1n8da5gtJ7o",
-        'Content-Type': 'application/json'
+        "Authorization": window.localStorage.getItem('accesstoken')
       },
       "data":JSON.stringify({
         "password":$('#userPassword').val(),

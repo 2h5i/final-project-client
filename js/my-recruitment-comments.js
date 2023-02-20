@@ -102,6 +102,7 @@ function pageing_list() {
   $('#pagination-buttons').append(pageNums);
 }
 
+
 // 게시물 목록
 function board_list(data) {
   var str = '';

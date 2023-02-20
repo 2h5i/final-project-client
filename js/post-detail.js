@@ -165,7 +165,7 @@ const addComment = () => {
     }),
     headers: {
       Authorization:
-        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYWFhIiwiYXV0aCI6IkFETUlOIiwiZXhwIjoxNjc2Nzg2Njg5LCJpYXQiOjE2NzY3ODMwODl9.gEzFSM0kQa7Fh-LVbhQ-vYfmxWdH1jXm6x9noLrNnS4',
+      window.localStorage.getItem('accesstoken'),
       'Content-Type': 'application/json',
     },
   };
@@ -205,7 +205,7 @@ const deletePost = () => {
     timeout: 0,
     headers: {
       Authorization:
-        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYWFhIiwiYXV0aCI6IkFETUlOIiwiZXhwIjoxNjc2ODg2MjQ1LCJpYXQiOjE2NzY4ODI2NDV9.RZhLRkT16tUP3R8mSl-AIWAF2H3SaiMRO47YXvrB71s',
+      window.localStorage.getItem('accesstoken'),
     },
   };
 
