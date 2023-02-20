@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const createdAtArea = document.getElementById('post-detail-createdAt');
     createdAtArea.innerText = response.createdAt;
 
-    const contentArea = document.getElementById('post-detail-content');
+    const contentArea = document.querySelector('.ql-editor');
     contentArea.innerHTML = response.content;
   });
 
@@ -192,5 +192,26 @@ const addComment = () => {
       TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION);
       comment_list(data);
     });
+  });
+};
+
+const moveToWritePage = () => {
+  window.location.href = `/post-update.html?id=${postId}`;
+};
+
+const deletePost = () => {
+  const deletePostSettings = {
+    url: `http://localhost:8080/api/posts/${postId}`,
+    method: 'DELETE',
+    timeout: 0,
+    headers: {
+      Authorization:
+        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYWFhIiwiYXV0aCI6IkFETUlOIiwiZXhwIjoxNjc2ODg2MjQ1LCJpYXQiOjE2NzY4ODI2NDV9.RZhLRkT16tUP3R8mSl-AIWAF2H3SaiMRO47YXvrB71s',
+    },
+  };
+
+  $.ajax(deletePostSettings).done(function (response) {
+    alert('게시글이 삭제되었습니다.');
+    window.location.href = '/posts.html';
   });
 };
