@@ -9,7 +9,7 @@ var page = 1; // 페이지가 1부터 시작할때
 
 document.addEventListener('DOMContentLoaded', function () {
   var settings = {
-    url: 'http://localhost:8080/api/recruitment-comments/23/my-page',
+    url: 'http://localhost:8080/api/recruitment-comments/my-page',
     method: 'GET',
     timeout: 0,
     data: {
@@ -17,8 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
       size: VIEW_DATA,
     },
     "headers": {
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyYWEiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTY3Njc4MTAzMCwiaWF0IjoxNjc2Nzc3NDMwfQ.mnH63KX574kFPEx0gd_iEAW3In166ptbniJAP8oQ7kE"
-      },
+         "Authorization": window.localStorage.getItem('accesstoken')      },
   };
 
   $.ajax(settings).done(function (response) {
@@ -73,33 +72,33 @@ function pageing_list() {
   var pageNums = [];
 
   $('#pagination-buttons').empty();
-
-  if (page != 1) {
-    pageNums.push("<a href='#' class='first' data-page=" + first + '>처음</a>');
-  }
-
-  if (setion_page != 1) {
-    pageNums.push("<a href='#' class='prev' data-page=" + prev + '>이전</a>');
-  }
-
-  // 페이징 번호 출력
-  for (var i = start; i < end; i++) {
-    if (page == i) {
-      pageNums.push('<a href="#" class="on" data-page=' + i + '>' + i + '</a>');
-      continue;
+  if (TOTAL_DATA != 0) {
+    if (page != 1) {
+      pageNums.push("<a href='#' class='first' data-page=" + first + '>처음</a>');
     }
 
-    pageNums.push('<a href="#" data-page=' + i + '>' + i + '</a>');
-  }
+    if (setion_page != 1) {
+      pageNums.push("<a href='#' class='prev' data-page=" + prev + '>이전</a>');
+    }
 
-  if (setion_page != TOTAL_SECTION) {
-    pageNums.push("<a href='#' class='next' data-page=" + next + '>다음</a>');
-  }
+    // 페이징 번호 출력
+    for (var i = start; i < end; i++) {
+      if (page == i) {
+        pageNums.push('<a href="#" class="on" data-page=' + i + '>' + i + '</a>');
+        continue;
+      }
 
-  if (page != last) {
-    pageNums.push("<a href='#' class='last' data-page=" + last + '>마지막</a>');
-  }
+      pageNums.push('<a href="#" data-page=' + i + '>' + i + '</a>');
+    }
 
+    if (setion_page != TOTAL_SECTION) {
+      pageNums.push("<a href='#' class='next' data-page=" + next + '>다음</a>');
+    }
+
+    if (page != last) {
+      pageNums.push("<a href='#' class='last' data-page=" + last + '>마지막</a>');
+    }
+  }
   $('#pagination-buttons').append(pageNums);
 }
 
