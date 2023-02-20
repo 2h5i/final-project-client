@@ -1,12 +1,12 @@
-const userId = window.location.href.split('?id=')[1];
-
-document.addEventListener('DOMContentLoaded', function updateUser(){
+// document.addEventListener('DOMContentLoaded', function updateUser(){
+const updateUser = () => {
     var settings = {
-      url: `http://localhost:8080/api/users`,
+      url: `http://localhost:8080/api/users/my-page`,
       method: 'PUT',
       timeout: 0,
       "headers": {
-        "Authorization": window.localStorage.getItem('accesstoken')
+        "Authorization": window.localStorage.getItem('accesstoken'),
+        'Content-Type': 'application/json',
       },
       "data":JSON.stringify({
         "password":$('#userPassword').val(),
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function updateUser(){
         alert("변경되었습니다, 다시 로그인해주세요");
         window.location.href="login.html";
     });
-});
+};
 
 
 function isSame() {
