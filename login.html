@@ -33,6 +33,8 @@
     <meta name="HandheldFriendly" content="true" />
     <title>Register a new account</title>
     <link rel="stylesheet" href="css/theme.min.css" />
+    <script src="js/login.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </head>
 
   <body
@@ -61,16 +63,15 @@
               <div class="col-12">
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label"
-                    >Email address</label
+                    >Username</label
                   >
                   <input
-                    type="email"
+                    type="text"
                     class="form-control form-control-lg bg-gray-800 border-dark"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
+                    id="userName"
                   />
                   <div id="emailHelp" class="form-text">
-                    We'll never share your email with anyone else.
+                    We'll never share your id with anyone else.
                   </div>
                 </div>
                 <div class="mb-3">
@@ -80,26 +81,14 @@
                   <input
                     type="password"
                     class="form-control form-control-lg bg-gray-800 border-dark"
-                    id="exampleInputPassword1"
+                    id="userPassword"
                   />
                 </div>
-                <div class="mb-3 form-check py-3">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    id="exampleCheck1"
-                  />
-                  <label class="form-check-label" for="exampleCheck1"
-                    >If you really don´t want any newsletter
-                    <strong>check this box</strong>. Then you just agree to
-                    receive our marketing mails and product stuff. If you check
-                    this box
-                    <strong>we will not send out our newsletter</strong> to you
-                    at all...on mondays.</label
-                  >
-                </div>
-                <button type="submit" class="btn btn-white btn-xl mb-4">
+                <button type="button" class="btn btn-white btn-xl mb-4" onclick="loginUser()">
                   Submit
+                </button>
+                <button type="button" class="btn btn-white btn-xl mb-4" onclick="location.href='signup.html'">
+                  Signup
                 </button>
               </div>
             </form>

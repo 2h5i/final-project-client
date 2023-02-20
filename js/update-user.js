@@ -1,6 +1,8 @@
-  function updateUser(){
+const userId = window.location.href.split('?id=')[1];
+
+document.addEventListener('DOMContentLoaded', function updateUser(){
     var settings = {
-      url: 'http://localhost:8080/api/users/25',
+      url: `http://localhost:8080/api/users/${userId}`,
       method: 'PUT',
       timeout: 0,
       "headers": {
@@ -16,7 +18,8 @@
         alert("변경되었습니다, 다시 로그인해주세요");
         window.location.href="login.html";
     });
-};
+});
+
 
 function isSame() {
     let pw = document.getElementById("userPassword");
