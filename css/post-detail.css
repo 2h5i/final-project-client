@@ -75,3 +75,9 @@
 #content {
   width: 80%;
 }
+
+.post-title-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
