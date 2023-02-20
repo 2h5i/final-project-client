@@ -27,7 +27,8 @@ document.addEventListener('DOMContentLoaded', function () {
     createdAtArea.innerText = response.createdAt;
 
     const hrefAtArea = document.getElementById('recruitment-detail-href');
-    hrefAtArea.innerHTML = response.href;
+    hrefAtArea.innerText = response.href;
+    hrefAtArea.href = response.href;
 
     const contentArea = document.getElementById('recruitment-detail-content');
     contentArea.innerHTML = response.content;

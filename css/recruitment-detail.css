@@ -67,3 +67,6 @@
     width: 80%;
   }
   
+  .btn{
+    cursor: pointer;
+  }
