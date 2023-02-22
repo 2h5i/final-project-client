@@ -20,5 +20,32 @@ function loginUser(){
         alert("로그인이 완료되었습니다.");
         window.location.href="index.html"; 
     });
-    
 };
+
+function kakaoLogin() {
+	var url = "http://" + window.location.hostname + ":8080/api/users/kakao";
+
+	$.ajax({
+		type: "GET",
+		url: url,
+		headers: {
+			"code": getCookie('code')
+		},
+		success: function (response) {
+			console.log(response);
+			setCookie('accessToken', response.atk);
+			setCookie('refreshToken', response.rtk);
+			clearCookie('code');
+			location.href = "./home.html";
+		},
+		error: function (response) {
+			if (response.responseJSON) {
+				alert("로그인 실패! : " + response.responseJSON.message + "😭");
+			} else {
+				alert("로그인 실패! 서버의 응답이 없습니다😭")
+			}
+			clearCookie('code');
+			location.href = "http://" + window.location.hostname + "/frontdoor.html"
+		}
+	})
+}

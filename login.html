@@ -33,8 +33,25 @@
     <meta name="HandheldFriendly" content="true" />
     <title>Register a new account</title>
     <link rel="stylesheet" href="css/theme.min.css" />
+    <link rel="stylesheet" href="css/login.css" />
     <script src="js/login.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        const urlParams = new URL(location.href).searchParams;
+        const code = urlParams.get('code');
+        console.log(window.location.hostname);
+        if (code) {
+          setCookie('code', code);
+          kakaoLogin();
+        }
+  
+        if (getCookie('accessToken') && getCookie('refreshToken')) {
+          alert("이미 로그인되어 있습니다.")
+          location.href = "http://" + window.location.hostname + "/home.html";
+        }
+      });
+    </script>
   </head>
 
   <body
@@ -57,7 +74,8 @@
             </a>
           </header>
           <main class="mb-auto col-12">
-            <h1>Register a new account - 로그인 페이지</h1>
+            <h1>로그인 페이지</h1>
+            <h2>Login Page</h2>
 
             <form class="row">
               <div class="col-12">
@@ -84,12 +102,16 @@
                     id="userPassword"
                   />
                 </div>
-                <button type="button" class="btn btn-white btn-xl mb-4" onclick="loginUser()">
-                  Submit
+                <button type="button" id="login-submit-btn" onclick="loginUser()">
+                  로그인
                 </button>
-                <button type="button" class="btn btn-white btn-xl mb-4" onclick="location.href='signup.html'">
-                  Signup
+                <button type="button" id="login-signup-btn" onclick="location.href='signup.html'">
+                  회원가입
                 </button>
+                <button type="button" id="login-kakao-btn" onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=b8054d0d502a7f824aa2ca329d139607&redirect_uri=http://localhost:5500/index.html&response_type=code'">
+                  카카오로 로그인하기
+                </button>
+
               </div>
             </form>
           </main>
@@ -100,3 +122,5 @@
     </div>
   </body>
 </html>
+
+
