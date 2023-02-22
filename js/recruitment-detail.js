@@ -189,3 +189,37 @@ const addComment = () => {
     });
   });
 };
+
+
+
+  function bookmark() {
+    let bookmarkSettings = {
+      url: `http://localhost:8080/api/bookmarks/${recruitmentId}/bookmark`,
+      method: 'POST',
+      timeout: 0,
+      headers: {
+        Authorization: window.localStorage.getItem('accesstoken'),
+      },
+    };
+  
+    $.ajax(bookmarkSettings).done(function (response) {
+      alert('북마크 완료');
+      location.reload();
+    });
+  };
+
+  function noBookmark() {
+    let bookmarkSettings = {
+      url: `http://localhost:8080/api/bookmarks/${recruitmentId}/bookmark`,
+      method: 'DELETE',
+      timeout: 0,
+      headers: {
+        Authorization: window.localStorage.getItem('accesstoken'),
+      },
+    };
+  
+    $.ajax(bookmarkSettings).done(function (response) {
+      alert('북마크 취소');
+      location.reload();
+    });
+  };
