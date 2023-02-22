@@ -33,7 +33,7 @@
     <meta name="HandheldFriendly" content="true" />
     <title>Klar HTML Template - Frontpage one</title>
     <link rel="stylesheet" href="css/theme.min.css" />
-    <link rel="stylesheet" href="css/recruitment-detail.css" />
+    <link rel="stylesheet" href="css/my-recruitments-comments.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
@@ -159,30 +159,22 @@
         <div
           class="container py-vh-4 position-relative mt-5 px-vw-5 text-center"
         >
-          <div class="recruitment-details-wrapper">
-            <div class="content-area">
-              <p id="recruitment-detail-title"></p>
-              <p>             
-                <span id="recruitment-detail-user-id"></span>
-                
-              </p>
-              <p><span id="recruitment-detail-createdAt"></span></p>
-              <div id="recruitment-detail-content"></div>
-              <p></p>
-              <p>채용 바로가기</p>
-              <p><a id="recruitment-detail-href" class="btn"></a></p>
-            </div>
-            <div class="comment-area">
-              <div class="comment-create-area">
-                <input id="content" name="content" placeholder="댓글을 입력해주세요"/>
-                <button class="btn btn-light" onclick="addComment()">댓글 작성하기</button>
-            </div>
-              <div class="comment-list-area">
-                <ul class="comment-list"></ul>
-              </div>
-            
-              <div class="comment-pagination"></div>
-            </div>
+          <div class="posts-title-area">
+            <h2>내 채용정보 댓글 모음</h2>
+          </div>
+          <div class="posts-content-area">
+            <table class="table table-secondary">
+                <thead>
+                  <tr>
+                    <th scope="col">댓글 내용</th>
+                  </tr>
+                </thead>
+                <tbody id="posts-tbody">
+                  
+                </tbody>
+              </table>
+
+              <div id="pagination-buttons"></div>
           </div>
         </div>
       </div>
@@ -209,7 +201,7 @@
 
     <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/aos.js"></script>
-    <script src="js/recruitment-detail.js"></script>
+    <script src="js/my-recruitment-comments.js"></script>
     <script>
       AOS.init({
         duration: 800, // values from 0 to 3000, with step 50ms

@@ -1,11 +1,11 @@
 
 document.addEventListener('DOMContentLoaded', function () {
   var settings = {
-    url: 'http://localhost:8080/api/users/23/my-page',
+    url: `http://localhost:8080/api/users/my-page`,
     method: 'GET',
     timeout: 0,
     "headers": {
-      "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyYWEiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTY3NjYzMzE3OCwiaWF0IjoxNjc2NjI5NTc4fQ.qEsAS6DcC5HlDqcSRo-EKgyRPzQyLhGGM1-tLuooVMM"
+      "Authorization": window.localStorage.getItem('accesstoken')
     },
   };
 

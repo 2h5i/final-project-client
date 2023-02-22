@@ -1,0 +1,31 @@
+.post-update-container {
+  margin-top: 50px;
+}
+
+.post-update-title {
+  border: 1px solid white;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.post-update-title input {
+  width: 80%;
+  margin-left: 10px;
+}
+
+.post-update-content {
+  border: 1px solid white;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 30px;
+}
+
+.ql-snow {
+  background-color: white; /* <== change this color */
+  color: black;
+  overflow: visible;
+}
