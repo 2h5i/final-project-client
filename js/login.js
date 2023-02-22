@@ -32,8 +32,12 @@ function kakaoLogin() {
     data: {
       code,
     },
-    success: function (response, status, xhr) {
-      console.log(xhr);
+    success: function (response) {
+      console.log(response);
+      window.localStorage.setItem(
+        'accesstoken',
+        response
+      );
 
       //   console.log(response);
       //   setCookie('accessToken', response.atk);
