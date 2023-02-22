@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   $.ajax(settings).done(function (response) {
     data = response.content;
-    console.log(response);
+
     TOTAL_DATA = response.totalElements;
     TOTAL_PAGE = response.totalPages;
     TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION);

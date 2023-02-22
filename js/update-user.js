@@ -13,7 +13,6 @@ const updateUser = () => {
     }),
   };
   $.ajax(settings).done(function (response) {
-    console.log(response);
     alert('변경되었습니다, 다시 로그인해주세요');
     window.location.href = 'login.html';
   });
