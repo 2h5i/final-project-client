@@ -93,7 +93,7 @@ function board_list(data) {
     str += `<tr>`;
     str += `<td>${recruitment.title}</td>`;
     str += `<td>${recruitment.subTitle}</td>`;
-    str += `<td>${recruitment.createdAt}</td>`;
+    str += `<td>${recruitment.createdAt}</td>`.slice(0,14);
     str += `<td><button style="background-color: #ffffff6b; font-weight: bold" onclick="location.href='/recruitment-detail.html?id=${recruitment.id}'">상세보기</button></td>`;
     str += '</tr>';
   });

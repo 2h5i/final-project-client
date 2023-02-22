@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
     userIdArea.innerText = response.userInfo.userId;
 
     const createdAtArea = document.getElementById('post-detail-createdAt');
-    createdAtArea.innerText = response.createdAt;
+    createdAtArea.innerText = response.createdAt.slice(0,10);
 
     const contentArea = document.querySelector('.ql-editor');
     contentArea.innerHTML = response.content;
@@ -141,7 +141,7 @@ function comment_list(data) {
     str += '<p class="comment-list-item">';
     str += `<span class="commnet">${comment.user.userId}</span>`;
     str += `<span>${comment.content}</span>`;
-    str += `<span>${comment.createdAt}</span>`;
+    str += `<span>${comment.createdAt}</span>`.slice(0,16);
     str += '</p>';
     str += '</li>';
   });
