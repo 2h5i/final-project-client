@@ -23,8 +23,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const userIdArea = document.getElementById('recruitment-detail-user-id');
     userIdArea.innerText = response.subTitle;
 
-    const createdAtArea = document.getElementById('recruitment-detail-createdAt');
-    createdAtArea.innerText = response.createdAt.slice(0,10);
+    const createdAtArea = document.getElementById(
+      'recruitment-detail-createdAt'
+    );
+    createdAtArea.innerText = response.createdAt.slice(0, 10);
 
     const hrefAtArea = document.getElementById('recruitment-detail-href');
     hrefAtArea.innerText = response.href;
@@ -136,7 +138,7 @@ function comment_list(data) {
     str += '<p class="comment-list-item">';
     str += `<span class="commnet">${comment.user.userId}</span>`;
     str += `<span>${comment.content}</span>`;
-    str += `<span>${comment.createdAt}</span>`.slice(0,16);
+    str += `<span>${comment.createdAt}</span>`.slice(0, 16);
     str += '</p>';
     str += '</li>';
   });
@@ -159,8 +161,7 @@ const addComment = () => {
       content,
     }),
     headers: {
-      Authorization:
-      window.localStorage.getItem('accesstoken'),
+      Authorization: window.localStorage.getItem('accesstoken'),
       'Content-Type': 'application/json',
     },
   };

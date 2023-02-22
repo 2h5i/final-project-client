@@ -16,13 +16,14 @@ document.addEventListener('DOMContentLoaded', function () {
       page: 0,
       size: VIEW_DATA,
     },
-    "headers": {
-         "Authorization": window.localStorage.getItem('accesstoken')      },
+    headers: {
+      Authorization: window.localStorage.getItem('accesstoken'),
+    },
   };
 
   $.ajax(settings).done(function (response) {
     data = response.content;
-    console.log(response);
+
     TOTAL_DATA = response.totalElements;
     TOTAL_PAGE = response.totalPages;
     TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION);
@@ -38,9 +39,9 @@ $('.posts-content-area').on('click', 'a', function (e) {
     url: 'http://localhost:8080/api/recruitment-comments/23/my-page',
     method: 'GET',
     timeout: 0,
-    "headers": {
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyYWEiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTY3Njc4MTAzMCwiaWF0IjoxNjc2Nzc3NDMwfQ.mnH63KX574kFPEx0gd_iEAW3In166ptbniJAP8oQ7kE"
-      },
+    headers: {
+      Authorization: window.localStorage.getItem('accesstoken'),
+    },
     data: {
       page: page - 1,
       size: VIEW_DATA,
@@ -48,7 +49,6 @@ $('.posts-content-area').on('click', 'a', function (e) {
   };
 
   $.ajax(settings).done(function (response) {
-    console.log(response);
     data = response.content;
 
     TOTAL_DATA = response.totalElements;
@@ -74,7 +74,9 @@ function pageing_list() {
   $('#pagination-buttons').empty();
   if (TOTAL_DATA != 0) {
     if (page != 1) {
-      pageNums.push("<a href='#' class='first' data-page=" + first + '>처음</a>');
+      pageNums.push(
+        "<a href='#' class='first' data-page=" + first + '>처음</a>'
+      );
     }
 
     if (setion_page != 1) {
@@ -84,7 +86,9 @@ function pageing_list() {
     // 페이징 번호 출력
     for (var i = start; i < end; i++) {
       if (page == i) {
-        pageNums.push('<a href="#" class="on" data-page=' + i + '>' + i + '</a>');
+        pageNums.push(
+          '<a href="#" class="on" data-page=' + i + '>' + i + '</a>'
+        );
         continue;
       }
 
@@ -96,12 +100,13 @@ function pageing_list() {
     }
 
     if (page != last) {
-      pageNums.push("<a href='#' class='last' data-page=" + last + '>마지막</a>');
+      pageNums.push(
+        "<a href='#' class='last' data-page=" + last + '>마지막</a>'
+      );
     }
   }
   $('#pagination-buttons').append(pageNums);
 }
-
 
 // 게시물 목록
 function board_list(data) {
