@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function () {
   var settings = {
     url: 'http://localhost:8080/api/users/23/my-page',
