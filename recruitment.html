@@ -150,24 +150,29 @@
           <div class="posts-title-area">
             <h2>채용 정보</h2>
           </div>
-          <div class="posts-content-area">
-            <table class="table table-secondary">
-                <thead>
-                  <tr>
-                    <th scope="col">제목</th>
-                    <th scope="col">조건</th>
-                    <th scope="col">작성일</th>
-                  </tr>
-                </thead>
-                <tbody id="posts-tbody">
-                  
-                </tbody>
-              </table>
-
-              <div id="pagination-buttons"></div>
-          </div>
+          <div class="search-area">
+            <p>제목 <input class="search-input" id="title" /></p>
+            <p>내용 <input class="search-input" id="content" /></p>
+            <button class="search-button" onclick="searchPost()">검색</button>
         </div>
-      </div>
+        <div class="card mb-4">
+            <div class="post-data-area">
+                <table class="table tbody" id="post-data">
+                    <thead>
+                        <tr>
+                            <th>제목</th>
+                            <th>조건</th>
+                            <th>작성일</th>
+                            <th>바로가기</th>
+                        </tr>
+                    </thead>
+                    <tbody id="posts-tbody">
+                    </tbody>
+                </table>
+                <div id="pagination-buttons"></div>
+            </div>
+        </div>
+    </div>
     </main>
 
     <footer class="bg-black border-top border-dark">

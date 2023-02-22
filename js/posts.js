@@ -7,14 +7,25 @@ let TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION); // 총구역(총페이
 
 var page = 1; // 페이지가 1부터 시작할때
 
-document.addEventListener('DOMContentLoaded', function () {
+let title = document.getElementById('title').value;
+let content = document.getElementById('content').value;
+let createdStarted;
+let createdEnded;
+
+const getDatas = (page) => {
   var settings = {
     url: 'http://localhost:8080/api/posts',
     method: 'GET',
     timeout: 0,
     data: {
-      page: 0,
+      page,
       size: VIEW_DATA,
+      title,
+      content,
+    },
+    headers: {
+      Authorization: window.localStorage.getItem('accesstoken'),
+      'Content-Type': 'application/json',
     },
   };
 
@@ -26,30 +37,42 @@ document.addEventListener('DOMContentLoaded', function () {
     TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION);
     board_list(data);
   });
+};
+
+$(function () {
+  $('input[name="start-end"]').daterangepicker({
+    opens: 'left',
+    autoUpdateInput: false,
+  });
+
+  $('input[name="start-end"]').on(
+    'apply.daterangepicker',
+    function (ev, picker) {
+      $(this).val(
+        picker.startDate.format('MM/DD/YYYY') +
+          ' - ' +
+          picker.endDate.format('MM/DD/YYYY')
+      );
+    }
+  );
+
+  $('input[name="start-end"]').on(
+    'cancel.daterangepicker',
+    function (ev, picker) {
+      $(this).val('');
+    }
+  );
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  getDatas(0);
 });
 
 // 페이징 버튼
-$('.posts-content-area').on('click', 'a', function (e) {
+$('#pagination-buttons').on('click', 'a', function (e) {
   page = parseInt($(this).data('page'));
 
-  var settings = {
-    url: 'http://localhost:8080/api/posts',
-    method: 'GET',
-    timeout: 0,
-    data: {
-      page: page - 1,
-      size: VIEW_DATA,
-    },
-  };
-
-  $.ajax(settings).done(function (response) {
-    const data = response.content;
-
-    TOTAL_DATA = response.totalElements;
-    TOTAL_PAGE = response.totalPages;
-    TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION);
-    board_list(data);
-  });
+  getDatas(page - 1);
 
   return false;
 });
@@ -67,30 +90,38 @@ function pageing_list() {
 
   $('#pagination-buttons').empty();
 
-  if (page != 1) {
-    pageNums.push("<a href='#' class='first' data-page=" + first + '>처음</a>');
-  }
-
-  if (setion_page != 1) {
-    pageNums.push("<a href='#' class='prev' data-page=" + prev + '>이전</a>');
-  }
-
-  // 페이징 번호 출력
-  for (var i = start; i < end; i++) {
-    if (page == i) {
-      pageNums.push('<a href="#" class="on" data-page=' + i + '>' + i + '</a>');
-      continue;
+  if (TOTAL_DATA !== 0) {
+    if (page != 1) {
+      pageNums.push(
+        "<a href='#' class='first' data-page=" + first + '>처음</a>'
+      );
     }
 
-    pageNums.push('<a href="#" data-page=' + i + '>' + i + '</a>');
-  }
+    if (setion_page != 1) {
+      pageNums.push("<a href='#' class='prev' data-page=" + prev + '>이전</a>');
+    }
 
-  if (setion_page != TOTAL_SECTION) {
-    pageNums.push("<a href='#' class='next' data-page=" + next + '>다음</a>');
-  }
+    // 페이징 번호 출력
+    for (var i = start; i < end; i++) {
+      if (page == i) {
+        pageNums.push(
+          '<a href="#" class="on" data-page=' + i + '>' + i + '</a>'
+        );
+        continue;
+      }
 
-  if (page != last) {
-    pageNums.push("<a href='#' class='last' data-page=" + last + '>마지막</a>');
+      pageNums.push('<a href="#" data-page=' + i + '>' + i + '</a>');
+    }
+
+    if (setion_page != TOTAL_SECTION) {
+      pageNums.push("<a href='#' class='next' data-page=" + next + '>다음</a>');
+    }
+
+    if (page != last) {
+      pageNums.push(
+        "<a href='#' class='last' data-page=" + last + '>마지막</a>'
+      );
+    }
   }
 
   $('#pagination-buttons').append(pageNums);
@@ -99,17 +130,33 @@ function pageing_list() {
 // 게시물 목록
 function board_list(data) {
   var str = '';
-  data.forEach((post) => {
-    str += `<tr onclick="location.href='/post-detail.html?id=${post.id}'">`;
-    str += `<td>${post.title}</td>`;
-    str += `<td>${post.userInfo.userId}</td>`;
-    str += `<td>${post.createdAt}</td>`;
-    str += `<td>${post.likeCnt}</td>`;
-    str += '</tr>';
-  });
 
+  if (TOTAL_DATA == 0) {
+    str += '<tr>';
+    str += '<td></td>';
+    str += '<td>데이터가 없습니다.</td>';
+    str += '<td></td>';
+    str += '<td></td>';
+    str += '</tr>';
+  } else {
+    data.forEach((post) => {
+      str += `<tr>`;
+      str += `<td>${post.id}</td>`;
+      str += `<td>${post.userInfo.userId}</td>`;
+      str += `<td>${post.title}</td>`;
+      str += `<td>${post.createdAt}</td>`;
+      str += `<td><button style="background-color:white" onclick="location.href='/post-detail.html?id=${post.id}'">상세 보기</button></td>`;
+      str += '</tr>';
+    });
+  }
   $('.table tbody').empty();
   $('.table tbody').append(str);
 
   pageing_list();
 }
+
+const searchPost = () => {
+  title = document.getElementById('title').value;
+  content = document.getElementById('content').value;
+  getDatas(0);
+};

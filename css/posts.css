@@ -5,7 +5,26 @@
 
 .posts-write-button-area {
   float: right;
-  margin-bottom: 30px;
+}
+
+.search-area {
+  border: 2px solid #212529;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  padding: 10px;
+}
+
+.search-button {
+  margin: 0 auto;
+  display: block;
+}
+
+.search-input {
+  width: 70%;
+}
+
+#start-end {
+  width: 50%;
 }
 
 /* 페이징 */
@@ -30,4 +49,13 @@
 }
 #pagination-buttons a.on {
   color: #f00;
+}
+
+.limit{
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  line-height: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
