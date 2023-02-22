@@ -50,8 +50,7 @@ const updatePost = () => {
     method: 'PUT',
     timeout: 0,
     headers: {
-      Authorization:
-        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhYWFhIiwiYXV0aCI6IkFETUlOIiwiZXhwIjoxNjc2ODgyMDQ4LCJpYXQiOjE2NzY4Nzg0NDh9.kFeTRU7MALKWc-KzciiiQrsTdeOe_g-ySOSZyyzucLg',
+      Authorization: window.localStorage.getItem('accesstoken'),
       'Content-Type': 'application/json',
     },
     data: JSON.stringify({

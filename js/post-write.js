@@ -33,8 +33,7 @@ const writePost = () => {
     method: 'POST',
     timeout: 0,
     headers: {
-      Authorization:
-      window.localStorage.getItem('accesstoken'),
+      Authorization: window.localStorage.getItem('accesstoken'),
       'Content-Type': 'application/json',
     },
     data: JSON.stringify({

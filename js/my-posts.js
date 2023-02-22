@@ -7,7 +7,6 @@ let TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION); // 총구역(총페이
 
 var page = 1; // 페이지가 1부터 시작할때
 
-
 document.addEventListener('DOMContentLoaded', function () {
   var settings = {
     url: 'http://localhost:8080/api/posts/my-page',
@@ -17,8 +16,9 @@ document.addEventListener('DOMContentLoaded', function () {
       page: 0,
       size: VIEW_DATA,
     },
-    "headers": {
-        "Authorization": window.localStorage.getItem('accesstoken')      },
+    headers: {
+      Authorization: window.localStorage.getItem('accesstoken'),
+    },
   };
 
   $.ajax(settings).done(function (response) {
@@ -39,9 +39,9 @@ $('.posts-content-area').on('click', 'a', function (e) {
     url: 'http://localhost:8080/api/posts/23/my-page',
     method: 'GET',
     timeout: 0,
-    "headers": {
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyYWEiLCJhdXRoIjoiVVNFUiIsImV4cCI6MTY3Njc3NzMwNywiaWF0IjoxNjc2NzczNzA3fQ.5D4wK-8QkzIv17v4jSfsXj4UO3R2dFZ3NDMSObAAngw"
-      },
+    headers: {
+      Authorization: window.localStorage.getItem('accesstoken'),
+    },
     data: {
       page: page - 1,
       size: VIEW_DATA,
@@ -74,7 +74,9 @@ function pageing_list() {
   $('#pagination-buttons').empty();
   if (TOTAL_DATA != 0) {
     if (page != 1) {
-      pageNums.push("<a href='#' class='first' data-page=" + first + '>처음</a>');
+      pageNums.push(
+        "<a href='#' class='first' data-page=" + first + '>처음</a>'
+      );
     }
 
     if (setion_page != 1) {
@@ -84,7 +86,9 @@ function pageing_list() {
     // 페이징 번호 출력
     for (var i = start; i < end; i++) {
       if (page == i) {
-        pageNums.push('<a href="#" class="on" data-page=' + i + '>' + i + '</a>');
+        pageNums.push(
+          '<a href="#" class="on" data-page=' + i + '>' + i + '</a>'
+        );
         continue;
       }
 
@@ -96,7 +100,9 @@ function pageing_list() {
     }
 
     if (page != last) {
-      pageNums.push("<a href='#' class='last' data-page=" + last + '>마지막</a>');
+      pageNums.push(
+        "<a href='#' class='last' data-page=" + last + '>마지막</a>'
+      );
     }
   }
   $('#pagination-buttons').append(pageNums);
