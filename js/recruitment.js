@@ -7,50 +7,40 @@ let TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION); // 총구역(총페이
 
 var page = 1; // 페이지가 1부터 시작할때
 
+let title = document.getElementById('title').value;
+let content = document.getElementById('content').value;
+
+const getDatas = (page) => {
+    var settings = {
+        url: 'http://localhost:8080/api/recruitments',
+        method: 'GET',
+        timeout: 0,
+        data: {
+          page,
+          size: VIEW_DATA,
+          title,
+          content,
+        },
+      };
+    
+      $.ajax(settings).done(function (response) {
+        data = response.content;
+    
+        TOTAL_DATA = response.totalElements;
+        TOTAL_PAGE = response.totalPages;
+        TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION);
+        board_list(data);
+      });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
-  var settings = {
-    url: 'http://localhost:8080/api/recruitments',
-    method: 'GET',
-    timeout: 0,
-    data: {
-      page: 0,
-      size: VIEW_DATA,
-    },
-  };
-
-  $.ajax(settings).done(function (response) {
-    data = response.content;
-
-    TOTAL_DATA = response.totalElements;
-    TOTAL_PAGE = response.totalPages;
-    TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION);
-    board_list(data);
-  });
+  getDatas(0);
 });
 
 // 페이징 버튼
-$('.posts-content-area').on('click', 'a', function (e) {
+$('.post-data-area').on('click', 'a', function (e) {
   page = parseInt($(this).data('page'));
-
-  var settings = {
-    url: 'http://localhost:8080/api/recruitments',
-    method: 'GET',
-    timeout: 0,
-    data: {
-      page: page - 1,
-      size: VIEW_DATA,
-    },
-  };
-
-  $.ajax(settings).done(function (response) {
-    data = response.content;
-
-    TOTAL_DATA = response.totalElements;
-    TOTAL_PAGE = response.totalPages;
-    TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION);
-    board_list(data);
-  });
-
+  getDatas(page-1);
   return false;
 });
 
@@ -100,10 +90,11 @@ function pageing_list() {
 function board_list(data) {
   var str = '';
   data.forEach((recruitment) => {
-    str += `<tr onclick="location.href='/recruitment-detail.html?id=${recruitment.id}'">`;
+    str += `<tr>`;
     str += `<td>${recruitment.title}</td>`;
     str += `<td>${recruitment.subTitle}</td>`;
     str += `<td>${recruitment.createdAt}</td>`;
+    str += `<td><button style="background-color: #ffffff6b; font-weight: bold" onclick="location.href='/recruitment-detail.html?id=${recruitment.id}'">상세보기</button></td>`;
     str += '</tr>';
   });
 
@@ -112,3 +103,10 @@ function board_list(data) {
 
   pageing_list();
 }
+
+const searchPost = () => {
+    title = document.getElementById('title').value;
+    content = document.getElementById('content').value;
+    getDatas(0);
+  };
+  
