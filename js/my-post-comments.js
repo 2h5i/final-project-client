@@ -36,7 +36,7 @@ $('.posts-content-area').on('click', 'a', function (e) {
   page = parseInt($(this).data('page'));
 
   var settings = {
-    url: 'http://localhost:8080/api/post-comments/23/my-page',
+    url: 'http://localhost:8080/api/post-comments/my-page',
     method: 'GET',
     timeout: 0,
     headers: {
@@ -112,7 +112,7 @@ function pageing_list() {
 function board_list(data) {
   var str = '';
   data.forEach((postcomment) => {
-    str += `<tr onclick="location.href='/post-detail.html?id=${postcomment.postid}'">`;
+    str += `<tr onclick="location.href='/post-detail.html?id=${postcomment.postId}'">`;
     str += `<td>${postcomment.content}</td>`;
     str += '</tr>';
   });

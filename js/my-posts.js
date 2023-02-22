@@ -36,7 +36,7 @@ $('.posts-content-area').on('click', 'a', function (e) {
   page = parseInt($(this).data('page'));
 
   var settings = {
-    url: 'http://localhost:8080/api/posts/23/my-page',
+    url: 'http://localhost:8080/api/posts/my-page',
     method: 'GET',
     timeout: 0,
     headers: {
@@ -110,9 +110,10 @@ function pageing_list() {
 
 // 게시물 목록
 function board_list(data) {
+  console.log(data);
   var str = '';
   data.forEach((post) => {
-    str += `<tr onclick="location.href='/post-detail.html?id=${post.id}'">`;
+    str += `<tr onclick="location.href='/post-detail.html?id=${post.postId}'">`;
     str += `<td>${post.title}</td>`;
     str += '</tr>';
   });

@@ -36,7 +36,7 @@ $('.posts-content-area').on('click', 'a', function (e) {
   page = parseInt($(this).data('page'));
 
   var settings = {
-    url: 'http://localhost:8080/api/recruitment-comments/23/my-page',
+    url: 'http://localhost:8080/api/recruitment-comments/my-page',
     method: 'GET',
     timeout: 0,
     headers: {
@@ -112,7 +112,7 @@ function pageing_list() {
 function board_list(data) {
   var str = '';
   data.forEach((recruitmentcomment) => {
-    str += `<tr onclick="location.href='/recruitment-detail.html?id=${recruitmentcomment.recruitmentid}'">`;
+    str += `<tr onclick="location.href='/recruitment-detail.html?id=${recruitmentcomment.recruitmentId}'">`;
     str += `<td>${recruitmentcomment.content}</td>`;
     str += '</tr>';
   });
