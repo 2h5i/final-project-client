@@ -12,8 +12,6 @@ function loginUser() {
     }),
   };
   $.ajax(settings).done(function (response, status, request) {
-    console.log(request.getResponseHeader('Authorization'));
-    console.log(request);
     window.localStorage.setItem(
       'accesstoken',
       request.getResponseHeader('Authorization')
@@ -33,17 +31,12 @@ function kakaoLogin() {
       code,
     },
     success: function (response) {
-      console.log(response);
       window.localStorage.setItem(
         'accesstoken',
         response
       );
-
-      //   console.log(response);
-      //   setCookie('accessToken', response.atk);
-      //   setCookie('refreshToken', response.rtk);
-      //   clearCookie('code');
-      //   location.href = './home.html';
+      alert('로그인이 완료되었습니다.');
+      window.location.href = 'index.html';
     },
     error: function (response) {
       if (response.responseJSON) {
@@ -51,7 +44,6 @@ function kakaoLogin() {
       } else {
         alert('로그인 실패! 서버의 응답이 없습니다😭');
       }
-      //   clearCookie('code');
       location.href = 'http://' + window.location.hostname + ':5500/index.html';
     },
   });

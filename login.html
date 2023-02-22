@@ -21,22 +21,13 @@
     $(document).ready(function () {
       const urlParams = new URL(location.href).searchParams;
       const code = urlParams.get('code');
-      console.log(code);
-      console.log(window.location.hostname);
       if (code) {
-        // setCookie('code', code);
         window.localStorage.setItem('code', code);
         kakaoLogin();
       }
-      console.log(window.localStorage.getItem('accesstoken'));
-      // if (window.localStorage.getItem('accesstoken')) {
-      //   alert("이미 로그인되어 있습니다.");
-      //   location.href = "http://" + window.location.hostname + ":5500/index.html";
-      // }
     });
   </script>
 </head>
-
 <body class="d-flex h-100 w-100 bg-black text-white" data-bs-spy="scroll" data-bs-target="#navScroll">
   <div class="h-100 container-fluid">
     <div class="h-100 row d-flex align-items-stretch">
@@ -74,15 +65,12 @@
                 onclick="location.href='https://kauth.kakao.com/oauth/authorize?client_id=b8054d0d502a7f824aa2ca329d139607&redirect_uri=http://localhost:5500/login.html&response_type=code'">
                 카카오로 로그인하기
               </button>
-
             </div>
           </form>
         </main>
       </div>
-
       <div class="col-12 col-md-5 col-lg-6 col-xl-7 gradient"></div>
     </div>
   </div>
 </body>
-
 </html>
