@@ -2,15 +2,11 @@
     --gap: 20px;
 }
 .container{
-
-    border: 1px solid var(#111111);
     max-width: 1200px;
     margin: 0 auto;
 }
 .box{
     border: 5px solid grey;
-    /* background-color: gray; */
-    /* background-color: #111111; */
     padding: var(--gap);
     display: flex;
     gap: 20px;
@@ -19,8 +15,7 @@
 }
 .box-image,
 .box-contents{
-    /* background-color: darkolivegreen; */
-    /* background-color: #111111; */
+
     padding: var(--gap);
 }
 .box-image{
@@ -38,8 +33,6 @@
     margin: 0 auto;
 }
 .boxs{
-    /* background-color: gray; */
-    background-color: #111111;
     padding: var(--gap);
     display: flex;
     gap: 20px;
@@ -49,33 +42,9 @@
 .box2,
 .box3,
 .box4{
-    /* background-color: darkolivegreen; */
-    background-color: #111111;
     padding: var(--gap);
     margin: auto;
     width: 300px;
     height: 200px;
 }
-/* .myButton {
-	box-shadow: 0px 10px 14px -7px #152145;
-	background:linear-gradient(to bottom, #acc6f2 5%, #0c0c0d 100%);
-	background-color:#acc6f2;
-	border-radius:8px;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:20px;
-	font-weight:bold;
-	padding:13px 32px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #4c76e0;
-}
-.myButton:hover {
-	background:linear-gradient(to bottom, #0c0c0d 5%, #acc6f2 100%);
-	background-color:#0c0c0d;
-}
-.myButton:active {
-	position:relative;
-	top:1px;
-} */
+
