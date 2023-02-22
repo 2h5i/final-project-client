@@ -144,7 +144,7 @@ function board_list(data) {
       str += `<td>${post.id}</td>`;
       str += `<td>${post.userInfo.userId}</td>`;
       str += `<td>${post.title}</td>`;
-      str += `<td>${post.createdAt}</td>`;
+      str += `<td>${post.createdAt}</td>`.slice(0,14);
       str += `<td><button style="background-color:white" onclick="location.href='/post-detail.html?id=${post.id}'">상세 보기</button></td>`;
       str += '</tr>';
     });
@@ -160,3 +160,4 @@ const searchPost = () => {
   content = document.getElementById('content').value;
   getDatas(0);
 };
+

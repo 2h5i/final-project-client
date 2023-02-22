@@ -50,12 +50,3 @@
 #pagination-buttons a.on {
   color: #f00;
 }
-
-.limit{
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  line-height: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
