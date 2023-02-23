@@ -133,3 +133,10 @@ const updateImage = () => {
   background.remove();
   modal.style.display = 'none';
 };
+const auth = () => {
+  if (window.localStorage.getItem('accesstoken')) {
+    location.href='/mypage.html';
+  }else{
+    alert("로그인이 필요합니다.");
+  }
+}

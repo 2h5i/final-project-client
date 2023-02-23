@@ -193,6 +193,7 @@ function comment_list(data) {
 
 // 코멘트 달기
 const addComment = () => {
+  if (window.localStorage.getItem('accesstoken')) {
   const content = document.getElementById('content').value;
 
   var createCommentSettings = {
@@ -230,6 +231,9 @@ const addComment = () => {
       comment_list(data);
     });
   });
+  }else{
+  alert("로그인이 필요합니다.")
+}
 };
 
 const moveToWritePage = () => {
@@ -307,3 +311,11 @@ const unlike = () => {
     alert('로그인 후 사용 가능합니다.');
   }
 };
+
+const auth = () => {
+  if (window.localStorage.getItem('accesstoken')) {
+    location.href='/mypage.html';
+  }else{
+    alert("로그인이 필요합니다.");
+  }
+}

@@ -63,3 +63,11 @@ const updatePost = () => {
     window.location.href = `/post-detail.html?id=${response}`;
   });
 };
+
+const auth = () => {
+  if (window.localStorage.getItem('accesstoken')) {
+    location.href='/mypage.html';
+  }else{
+    alert("로그인이 필요합니다.");
+  }
+}

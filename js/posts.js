@@ -136,3 +136,19 @@ const searchPost = () => {
   content = document.getElementById('content').value;
   getDatas(0);
 };
+
+const postWrite = () => {
+  if (window.localStorage.getItem('accesstoken')) {
+    location.href='/post-write.html';
+  }else {
+    alert("로그인이 필요합니다.");
+  }
+
+}
+const auth = () => {
+  if (window.localStorage.getItem('accesstoken')) {
+    location.href='/mypage.html';
+  }else{
+    alert("로그인이 필요합니다.");
+  }
+}
