@@ -57,6 +57,28 @@ document.addEventListener('DOMContentLoaded', function () {
     TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION);
     comment_list(data);
   });
+
+  // 좋아요 여부 확인
+  if (window.localStorage.getItem('accesstoken')) {
+    var settings = {
+      url: `http://localhost:8080/api/likes/${postId}/check`,
+      method: 'GET',
+      timeout: 0,
+      headers: {
+        Authorization: window.localStorage.getItem('accesstoken'),
+      },
+    };
+
+    $.ajax(settings).done(function (response) {
+      if (response) {
+        showLikeBtn();
+      } else {
+        showUnLikeBtn();
+      }
+    });
+  } else {
+    showUnLikeBtn();
+  }
 });
 
 // 페이징 버튼
@@ -211,4 +233,58 @@ const deletePost = () => {
     alert('게시글이 삭제되었습니다.');
     window.location.href = '/posts.html';
   });
+};
+
+const showLikeBtn = () => {
+  const unlike = document.getElementById('post-unlike-btn');
+  const like = document.getElementById('post-like-btn');
+
+  unlike.style.display = 'none';
+  like.style.display = 'block';
+};
+
+const showUnLikeBtn = () => {
+  const unlike = document.getElementById('post-unlike-btn');
+  const like = document.getElementById('post-like-btn');
+
+  unlike.style.display = 'block';
+  like.style.display = 'none';
+};
+
+const like = () => {
+  if (window.localStorage.getItem('accesstoken')) {
+    var settings = {
+      url: `http://localhost:8080/api/likes/${postId}/like`,
+      method: 'POST',
+      timeout: 0,
+      headers: {
+        Authorization: window.localStorage.getItem('accesstoken'),
+      },
+    };
+
+    $.ajax(settings).done(function (response) {
+      showLikeBtn();
+    });
+  } else {
+    alert('로그인 후 사용 가능합니다.');
+  }
+};
+
+const unlike = () => {
+  if (window.localStorage.getItem('accesstoken')) {
+    var settings = {
+      url: `http://localhost:8080/api/likes/${postId}/unlike`,
+      method: 'DELETE',
+      timeout: 0,
+      headers: {
+        Authorization: window.localStorage.getItem('accesstoken'),
+      },
+    };
+
+    $.ajax(settings).done(function (response) {
+      showUnLikeBtn();
+    });
+  } else {
+    alert('로그인 후 사용 가능합니다.');
+  }
 };
