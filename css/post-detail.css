@@ -73,11 +73,18 @@
 }
 
 #content {
-  width: 80%;
+  width: 70%;
 }
 
 .post-title-area {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.like-area {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 10%;
 }
