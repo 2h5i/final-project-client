@@ -110,7 +110,6 @@ function pageing_list() {
 
 // 게시물 목록
 function board_list(data) {
-  console.log(data);
   var str = '';
   data.forEach((post) => {
     str += `<tr onclick="location.href='/post-detail.html?id=${post.postId}'">`;

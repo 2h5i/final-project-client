@@ -79,7 +79,24 @@ document.addEventListener('DOMContentLoaded', function () {
   } else {
     showUnLikeBtn();
   }
+
+  // 좋아요 갯수
+  getLikeCnt();
 });
+
+const getLikeCnt = () => {
+  console.log('??????');
+  var likeCntSettings = {
+    url: `http://localhost:8080/api/likes/${postId}`,
+    method: 'GET',
+    timeout: 0,
+  };
+
+  $.ajax(likeCntSettings).done(function (response) {
+    const likeCntSpan = document.getElementById('like-cnt');
+    likeCntSpan.innerText = response;
+  });
+};
 
 // 페이징 버튼
 $('.comment-pagination').on('click', 'a', function (e) {
@@ -264,6 +281,7 @@ const like = () => {
 
     $.ajax(settings).done(function (response) {
       showLikeBtn();
+      getLikeCnt();
     });
   } else {
     alert('로그인 후 사용 가능합니다.');
@@ -283,6 +301,7 @@ const unlike = () => {
 
     $.ajax(settings).done(function (response) {
       showUnLikeBtn();
+      getLikeCnt();
     });
   } else {
     alert('로그인 후 사용 가능합니다.');
