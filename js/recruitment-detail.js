@@ -53,7 +53,29 @@ document.addEventListener('DOMContentLoaded', function () {
     TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION);
     comment_list(data);
   });
+
+  if (window.localStorage.getItem('accesstoken')) {
+    var settings = {
+      url: `http://localhost:8080/api/bookmarks/${recruitmentId}/check`,
+      method: 'GET',
+      timeout: 0,
+      headers: {
+        Authorization: window.localStorage.getItem('accesstoken'),
+      },
+    };
+  
+    $.ajax(settings).done(function (response) {
+      if (response) {
+        showBookmarkBtn();
+      } else {
+        showUnBookmarkBtn();
+      }
+    });
+  } else {
+    showUnBookmarkBtn();
+  }
 });
+
 
 // 페이징 버튼
 $('.comment-pagination').on('click', 'a', function (e) {
@@ -190,36 +212,56 @@ const addComment = () => {
   });
 };
 
+const showBookmarkBtn = () => {
+  const unbookmark = document.getElementById('post-unbookmark-btn');
+  const bookmark = document.getElementById('post-bookmark-btn');
 
+  unbookmark.style.display = 'none';
+  bookmark.style.display = 'block';
+};
 
-  function bookmark() {
-    let bookmarkSettings = {
-      url: `http://localhost:8080/api/bookmarks/${recruitmentId}/bookmark`,
-      method: 'POST',
-      timeout: 0,
-      headers: {
-        Authorization: window.localStorage.getItem('accesstoken'),
-      },
-    };
+const showUnBookmarkBtn = () => {
+  const unbookmark = document.getElementById('post-unbookmark-btn');
+  const bookmark = document.getElementById('post-bookmark-btn');
+
+  unbookmark.style.display = 'block';
+  bookmark.style.display = 'none';
+};
+
+  const bookmark = () => {
+    if (window.localStorage.getItem('accesstoken')) {
+      var settings = {
+        url: `http://localhost:8080/api/bookmarks/${recruitmentId}/bookmark`,
+        method: 'POST',
+        timeout: 0,
+        headers: {
+          Authorization: window.localStorage.getItem('accesstoken'),
+        },
+      };
   
-    $.ajax(bookmarkSettings).done(function (response) {
-      alert('북마크 완료');
-      location.reload();
-    });
+      $.ajax(settings).done(function (response) {
+        showBookmarkBtn();
+      });
+    } else {
+      alert('로그인 후 사용 가능합니다.');
+    }
   };
-
-  function noBookmark() {
-    let bookmarkSettings = {
-      url: `http://localhost:8080/api/bookmarks/${recruitmentId}/bookmark`,
-      method: 'DELETE',
-      timeout: 0,
-      headers: {
-        Authorization: window.localStorage.getItem('accesstoken'),
-      },
-    };
   
-    $.ajax(bookmarkSettings).done(function (response) {
-      alert('북마크 취소');
-      location.reload();
-    });
+  const unbookmark = () => {
+    if (window.localStorage.getItem('accesstoken')) {
+      var settings = {
+        url: `http://localhost:8080/api/bookmarks/${recruitmentId}/bookmark`,
+        method: 'DELETE',
+        timeout: 0,
+        headers: {
+          Authorization: window.localStorage.getItem('accesstoken'),
+        },
+      };
+  
+      $.ajax(settings).done(function (response) {
+        showUnBookmarkBtn();
+      });
+    } else {
+      alert('로그인 후 사용 가능합니다.');
+    }
   };

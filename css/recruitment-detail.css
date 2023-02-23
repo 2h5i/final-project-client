@@ -70,3 +70,8 @@
   .btn{
     cursor: pointer;
   }
+
+  .bookmark-box{
+    display: flex;
+    justify-content: center;
+  }
