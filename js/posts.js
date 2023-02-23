@@ -39,31 +39,6 @@ const getDatas = (page) => {
   });
 };
 
-$(function () {
-  $('input[name="start-end"]').daterangepicker({
-    opens: 'left',
-    autoUpdateInput: false,
-  });
-
-  $('input[name="start-end"]').on(
-    'apply.daterangepicker',
-    function (ev, picker) {
-      $(this).val(
-        picker.startDate.format('MM/DD/YYYY') +
-          ' - ' +
-          picker.endDate.format('MM/DD/YYYY')
-      );
-    }
-  );
-
-  $('input[name="start-end"]').on(
-    'cancel.daterangepicker',
-    function (ev, picker) {
-      $(this).val('');
-    }
-  );
-});
-
 document.addEventListener('DOMContentLoaded', function () {
   getDatas(0);
 });
@@ -144,7 +119,8 @@ function board_list(data) {
       str += `<td>${post.id}</td>`;
       str += `<td>${post.userInfo.userId}</td>`;
       str += `<td>${post.title}</td>`;
-      str += `<td>${post.createdAt}</td>`.slice(0,14);
+      str += `<td>${post.likeCnt}</td>`;
+      str += `<td>${post.createdAt}</td>`.slice(0, 14);
       str += `<td><button style="background-color:white" onclick="location.href='/post-detail.html?id=${post.id}'">상세 보기</button></td>`;
       str += '</tr>';
     });
@@ -160,4 +136,3 @@ const searchPost = () => {
   content = document.getElementById('content').value;
   getDatas(0);
 };
-
