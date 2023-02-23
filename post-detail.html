@@ -129,8 +129,14 @@
               <div class="ql-editor"></div>
             </div>
           </div>
-          <div class="comment-area">
+          <div class="comment-like-area">
             <div class="comment-create-area">
+              <div>
+                <img src="/images/unlike.png" alt="좋아요" width="30px" height="30px" id="post-unlike-btn"
+                  onclick="like()" />
+                <img src="/images/like.png" alt="좋아요 취소" width="30px" height="30px" id="post-like-btn"
+                  onclick="unlike()" />
+              </div>
               <input id="content" name="content" placeholder="댓글을 입력해주세요" />
               <button class="btn btn-light" onclick="addComment()">댓글 작성하기</button>
             </div>

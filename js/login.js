@@ -31,10 +31,7 @@ function kakaoLogin() {
       code,
     },
     success: function (response) {
-      window.localStorage.setItem(
-        'accesstoken',
-        response
-      );
+      window.localStorage.setItem('accesstoken', response);
       alert('로그인이 완료되었습니다.');
       window.location.href = 'index.html';
     },
