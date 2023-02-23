@@ -50,3 +50,9 @@
 #pagination-buttons a.on {
   color: #f00;
 }
+
+.title-td{
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
