@@ -115,7 +115,12 @@
               <span id="recruitment-detail-user-id"></span>
             </p>
             <p><span id="recruitment-detail-createdAt"></span></p>
-            <p><button class="btn btn-light" id="bookmark" onclick="bookmark(), noBookmark()">북마크</button></p>
+            <span class="bookmark-box">
+              <img src="/images/unbookmark.png" alt="북마크" width="40px" height="40px" id="post-unbookmark-btn"
+                onclick="bookmark()" />
+              <img src="/images/bookmark.png" alt="북마크 취소" width="40px" height="40px" id="post-bookmark-btn"
+                onclick="unbookmark()" />
+            </span>
             <div id="recruitment-detail-content"></div>
             <p></p>
             <p>채용 바로가기</p>
