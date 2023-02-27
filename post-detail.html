@@ -110,9 +110,9 @@
             <p class="post-title-area">
               <span id="post-detail-title"></span>
               <span>
-                <!-- TODO 게시글 작성자 아이디랑 본인 아이디 같을 때에만, 기능 추가하기-->
-                <button class="btn btn-light" onclick="moveToWritePage()">수정</button>
-                <button class="btn btn-danger" onclick="deletePost()">삭제</button>
+                <button class="btn btn-light" onclick="moveToWritePage()" style="display:none"
+                  id="post-edit">수정</button>
+                <button class="btn btn-danger" onclick="deletePost()" style="display:none" id="post-delete">삭제</button>
               </span>
             </p>
             <p>
@@ -134,7 +134,7 @@
                   onclick="like()" />
                 <img src="/images/like.png" alt="좋아요 취소" width="30px" height="30px" id="post-like-btn"
                   onclick="unlike()" style="display: none;" />
-                <span id="like-cnt">좋아요 갯수</span>
+                <span id="like-cnt"></span>
               </div>
               <input id="content" name="content" placeholder="댓글을 입력해주세요" />
               <button class="btn btn-light" onclick="addComment()">댓글 작성하기</button>

@@ -38,25 +38,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const contentArea = document.querySelector('.ql-editor');
     contentArea.innerHTML = response.content;
+
+    if (
+      response.userInfo.userId ===
+      parseJwt(localStorage.getItem('accesstoken')).sub
+    ) {
+      const editBtn = document.getElementById('post-edit');
+      const deleteBtn = document.getElementById('post-delete');
+
+      editBtn.style.display = 'inline-block';
+      deleteBtn.style.display = 'inline-block';
+    }
   });
 
-  const commentSettings = {
-    url: `http://localhost:8080/api/post-comments/${postId}`,
-    method: 'GET',
-    timeout: 0,
-    data: {
-      page: page - 1,
-      size: VIEW_DATA,
-    },
-  };
-
-  $.ajax(commentSettings).done(function (response) {
-    const data = response.content;
-    TOTAL_DATA = response.totalElements;
-    TOTAL_PAGE = response.totalPages;
-    TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION);
-    comment_list(data);
-  });
+  getComments(0);
 
   // 좋아요 여부 확인
   if (window.localStorage.getItem('accesstoken')) {
@@ -85,7 +80,6 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 const getLikeCnt = () => {
-  console.log('??????');
   var likeCntSettings = {
     url: `http://localhost:8080/api/likes/${postId}`,
     method: 'GET',
@@ -102,12 +96,18 @@ const getLikeCnt = () => {
 $('.comment-pagination').on('click', 'a', function (e) {
   page = parseInt($(this).data('page'));
 
-  var commentSettings = {
+  getComments(page - 1);
+
+  return false;
+});
+
+const getComments = (page) => {
+  const commentSettings = {
     url: `http://localhost:8080/api/post-comments/${postId}`,
     method: 'GET',
     timeout: 0,
     data: {
-      page: page - 1,
+      page: page,
       size: VIEW_DATA,
     },
   };
@@ -119,9 +119,7 @@ $('.comment-pagination').on('click', 'a', function (e) {
     TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION);
     comment_list(data);
   });
-
-  return false;
-});
+};
 
 // 댓글 페이징 목록
 function pageing_list() {
@@ -175,12 +173,24 @@ function pageing_list() {
 // 댓글 목록
 function comment_list(data) {
   var str = '';
+
   data.forEach((comment) => {
     str += '<li>';
-    str += '<p class="comment-list-item">';
+    str += `<p class="comment-list-item" id="post-comment-${comment.postCommentId}">`;
     str += `<span class="commnet">${comment.user.userId}</span>`;
-    str += `<span>${comment.content}</span>`;
-    str += `<span>${comment.createdAt}</span>`.slice(0, 16);
+    str += `<span id="comment-content-${comment.postCommentId}">${comment.content}</span>`;
+    str += `<span>${comment.createdAt.slice(0, 10)}</span>`;
+    if (
+      comment.user.userId === parseJwt(localStorage.getItem('accesstoken')).sub
+    ) {
+      str += `<span onclick="handleEditComment(${comment.postCommentId})">수정</span>`;
+      str += `<a onclick="deleteComment(${comment.postCommentId})">삭제</a>`;
+    }
+    str += '</p>';
+    str += `<p class="comment-list-item" id="post-comment-edit-${comment.postCommentId}" style="display: none;">`;
+    str += `<input value="${comment.content}" id="update-comment-${comment.postCommentId}"}>`;
+    str += `<button onclick="updateComment(${comment.postCommentId})">수정 완료</button>`;
+    str += `<button onclick="cancelEditcomment(${comment.postCommentId})">취소</button>`;
     str += '</p>';
     str += '</li>';
   });
@@ -194,46 +204,46 @@ function comment_list(data) {
 // 코멘트 달기
 const addComment = () => {
   if (window.localStorage.getItem('accesstoken')) {
-  const content = document.getElementById('content').value;
+    const content = document.getElementById('content').value;
 
-  var createCommentSettings = {
-    url: `http://localhost:8080/api/post-comments/${postId}`,
-    method: 'POST',
-    timeout: 0,
-    data: JSON.stringify({
-      content,
-    }),
-    headers: {
-      Authorization: window.localStorage.getItem('accesstoken'),
-      'Content-Type': 'application/json',
-    },
-  };
-
-  $.ajax(createCommentSettings).done(function (response) {
-    document.getElementById('content').value = null;
-
-    var commentSettings = {
+    var createCommentSettings = {
       url: `http://localhost:8080/api/post-comments/${postId}`,
-      method: 'GET',
+      method: 'POST',
       timeout: 0,
-      data: {
-        page: page - 1,
-        size: VIEW_DATA,
+      data: JSON.stringify({
+        content,
+      }),
+      headers: {
+        Authorization: window.localStorage.getItem('accesstoken'),
+        'Content-Type': 'application/json',
       },
     };
 
-    $.ajax(commentSettings).done(function (response) {
-      const data = response.content;
+    $.ajax(createCommentSettings).done(function (response) {
+      document.getElementById('content').value = null;
 
-      TOTAL_DATA = response.totalElements;
-      TOTAL_PAGE = response.totalPages;
-      TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION);
-      comment_list(data);
+      var commentSettings = {
+        url: `http://localhost:8080/api/post-comments/${postId}`,
+        method: 'GET',
+        timeout: 0,
+        data: {
+          page: page - 1,
+          size: VIEW_DATA,
+        },
+      };
+
+      $.ajax(commentSettings).done(function (response) {
+        const data = response.content;
+
+        TOTAL_DATA = response.totalElements;
+        TOTAL_PAGE = response.totalPages;
+        TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION);
+        comment_list(data);
+      });
     });
-  });
-  }else{
-  alert("로그인이 필요합니다.")
-}
+  } else {
+    alert('로그인이 필요합니다.');
+  }
 };
 
 const moveToWritePage = () => {
@@ -314,8 +324,73 @@ const unlike = () => {
 
 const auth = () => {
   if (window.localStorage.getItem('accesstoken')) {
-    location.href='/mypage.html';
-  }else{
-    alert("로그인이 필요합니다.");
+    location.href = '/mypage.html';
+  } else {
+    alert('로그인이 필요합니다.');
   }
-}
+};
+
+const parseJwt = (token) => {
+  try {
+    return JSON.parse(atob(token.split('.')[1]));
+  } catch (e) {
+    return null;
+  }
+};
+
+const handleEditComment = (postCommentId) => {
+  const commentPTag = document.getElementById(`post-comment-${postCommentId}`);
+  commentPTag.style.display = 'none';
+  const commentInput = document.getElementById(
+    `post-comment-edit-${postCommentId}`
+  );
+  commentInput.style.display = 'flex';
+};
+
+const cancelEditcomment = (postCommentId) => {
+  const commentPTag = document.getElementById(`post-comment-${postCommentId}`);
+  commentPTag.style.display = 'flex';
+  const commentInput = document.getElementById(
+    `post-comment-edit-${postCommentId}`
+  );
+  commentInput.style.display = 'none';
+};
+
+const updateComment = (postCommentId) => {
+  const comment = document.getElementById(
+    `update-comment-${postCommentId}`
+  ).value;
+
+  var settings = {
+    url: `http://localhost:8080/api/post-comments/${postCommentId}`,
+    method: 'PUT',
+    timeout: 0,
+    headers: {
+      Authorization: window.localStorage.getItem('accesstoken'),
+      'Content-Type': 'application/json',
+    },
+    data: JSON.stringify({
+      content: comment,
+    }),
+  };
+
+  $.ajax(settings).done(function (response) {
+    getComments(page - 1);
+  });
+};
+
+const deleteComment = (postCommentId) => {
+  var settings = {
+    url: `http://localhost:8080/api/post-comments/${postCommentId}`,
+    method: 'DELETE',
+    timeout: 0,
+    headers: {
+      Authorization: window.localStorage.getItem('accesstoken'),
+    },
+  };
+
+  $.ajax(settings).done(function (response) {
+    page = 1;
+    getComments(0);
+  });
+};
