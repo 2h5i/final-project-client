@@ -156,11 +156,24 @@ function pageing_list() {
 function comment_list(data) {
   var str = '';
   data.forEach((comment) => {
+    console.log(comment.user.userId);
+    console.log(parseJwt(localStorage.getItem('accesstoken')).sub);
     str += '<li>';
-    str += '<p class="comment-list-item">';
+    str += `<p class="comment-list-item" id="recruitment-comment-${comment.recruitmentCommentId}">`;
     str += `<span class="commnet">${comment.user.userId}</span>`;
     str += `<span>${comment.content}</span>`;
-    str += `<span>${comment.createdAt}</span>`.slice(0, 16);
+    str += `<span>${comment.createdAt.slice(0, 10)}</span>`;
+    if (
+      comment.user.userId === parseJwt(localStorage.getItem('accesstoken')).sub
+    ) {
+      str += `<span onclick="handleEditComment(${comment.recruitmentCommentId})">수정</span>`;
+      str += `<a onclick="deleteComment(${comment.recruitmentCommentId})">삭제</a>`;
+    }
+    str += '</p>';
+    str += `<p class="comment-list-item" id="recruitment-comment-edit-${comment.recruitmentCommentId}" style="display: none;">`;
+    str += `<input value="${comment.content}" id="update-comment-${comment.recruitmentCommentId}"}>`;
+    str += `<button onclick="updateComment(${comment.recruitmentCommentId})">수정 완료</button>`;
+    str += `<button onclick="cancelEditcomment(${comment.recruitmentCommentId})">취소</button>`;
     str += '</p>';
     str += '</li>';
   });
@@ -278,3 +291,88 @@ const showUnBookmarkBtn = () => {
     }
   }
   
+  const handleEditComment = (recruitmentCommentId) => {
+    const commentPTag = document.getElementById(`recruitment-comment-${recruitmentCommentId}`);
+    commentPTag.style.display = 'none';
+    const commentInput = document.getElementById(
+      `recruitment-comment-edit-${recruitmentCommentId}`
+    );
+    commentInput.style.display = 'flex';
+  };
+  
+  const cancelEditcomment = (recruitmentCommentId) => {
+    const commentPTag = document.getElementById(`recruitment-comment-${recruitmentCommentId}`);
+    commentPTag.style.display = 'flex';
+    const commentInput = document.getElementById(
+      `recruitment-comment-edit-${recruitmentCommentId}`
+    );
+    commentInput.style.display = 'none';
+  };
+  
+  const updateComment = (recruitmentCommentId) => {
+    const comment = document.getElementById(
+      `update-comment-${recruitmentCommentId}`
+    ).value;
+  
+    var settings = {
+      url: `http://localhost:8080/api/recruitment-comments/${recruitmentCommentId}`,
+      method: 'PUT',
+      timeout: 0,
+      headers: {
+        Authorization: window.localStorage.getItem('accesstoken'),
+        'Content-Type': 'application/json',
+      },
+      data: JSON.stringify({
+        content: comment,
+      }),
+    };
+  
+    $.ajax(settings).done(function (response) {
+      getComments(page - 1);
+    });
+  };
+  
+  const deleteComment = (recruitmentCommentId) => {
+    var settings = {
+      url: `http://localhost:8080/api/recruitment-comments/${recruitmentCommentId}`,
+      method: 'DELETE',
+      timeout: 0,
+      headers: {
+        Authorization: window.localStorage.getItem('accesstoken'),
+      },
+    };
+  
+    $.ajax(settings).done(function (response) {
+      page = 1;
+      getComments(0);
+    });
+  };
+  
+  const parseJwt = (token) => {
+    try {
+      return JSON.parse(atob(token.split('.')[1]));
+    } catch (e) {
+      return null;
+    }
+  };
+
+
+  const getComments = (page) => {
+    const commentSettings = {
+      url: `http://localhost:8080/api/recruitment-comments/${recruitmentId}`,
+      method: 'GET',
+      timeout: 0,
+      data: {
+        page: page,
+        size: VIEW_DATA,
+      },
+    };
+  
+    $.ajax(commentSettings).done(function (response) {
+      const data = response.content;
+      TOTAL_DATA = response.totalElements;
+      TOTAL_PAGE = response.totalPages;
+      TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION);
+      comment_list(data);
+    });
+  };
