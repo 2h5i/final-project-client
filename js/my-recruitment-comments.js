@@ -9,7 +9,7 @@ var page = 1; // 페이지가 1부터 시작할때
 
 document.addEventListener('DOMContentLoaded', function () {
   var settings = {
-    url: 'http://3.37.11.74/api/recruitment-comments/my-page',
+    url: 'http://3.37.11.74:8080/api/recruitment-comments/my-page',
     method: 'GET',
     timeout: 0,
     data: {
@@ -36,7 +36,7 @@ $('.posts-content-area').on('click', 'a', function (e) {
   page = parseInt($(this).data('page'));
 
   var settings = {
-    url: 'http://3.37.11.74/api/recruitment-comments/my-page',
+    url: 'http://3.37.11.74:8080/api/recruitment-comments/my-page',
     method: 'GET',
     timeout: 0,
     headers: {

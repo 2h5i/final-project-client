@@ -29,7 +29,7 @@ const writePost = () => {
   const content = quill.root.innerHTML;
 
   var settings = {
-    url: 'http://3.37.11.74/api/posts',
+    url: 'http://3.37.11.74:8080/api/posts',
     method: 'POST',
     timeout: 0,
     headers: {

@@ -1,6 +1,6 @@
 function loginUser() {
   var settings = {
-    url: 'http://3.37.11.74/api/auth/login',
+    url: 'http://3.37.11.74:8080/api/auth/login',
     method: 'POST',
     timeout: 0,
     headers: {
@@ -29,7 +29,7 @@ function kakaoLogin() {
   const code = window.localStorage.getItem('code');
   $.ajax({
     type: 'GET',
-    url: 'http://3.37.11.74/api/auth/kakao-login',
+    url: 'http://3.37.11.74:8080/api/auth/kakao-login',
     data: {
       code,
     },

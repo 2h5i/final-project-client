@@ -12,7 +12,7 @@ let content = document.getElementById('content').value;
 
 const getDatas = (page) => {
     var settings = {
-        url: 'http://3.37.11.74/api/recruitments',
+        url: 'http://3.37.11.74:8080/api/recruitments',
         method: 'GET',
         timeout: 0,
         data: {

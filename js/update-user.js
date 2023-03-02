@@ -1,7 +1,7 @@
 // document.addEventListener('DOMContentLoaded', function updateUser(){
 const updateUser = () => {
   var settings = {
-    url: `http://3.37.11.74/api/users/my-page`,
+    url: `http://3.37.11.74:8080/api/users/my-page`,
     method: 'PUT',
     timeout: 0,
     headers: {

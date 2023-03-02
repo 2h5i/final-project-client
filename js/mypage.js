@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   var settings = {
-    url: `http://3.37.11.74/api/users/my-page`,
+    url: `http://3.37.11.74:8080/api/users/my-page`,
     method: 'GET',
     timeout: 0,
     headers: {
@@ -104,7 +104,7 @@ const updateImage = () => {
   form.append('profileImage', file.files[0], file.files[0].name);
 
   var settings = {
-    url: 'http://3.37.11.74/api/users/image',
+    url: 'http://3.37.11.74:8080/api/users/image',
     method: 'POST',
     timeout: 0,
     headers: {
