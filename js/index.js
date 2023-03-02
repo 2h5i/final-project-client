@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   var settings = {
-    url: 'http://localhost:8080/api/recruitments/main',
+    url: 'http://3.37.11.74/api/recruitments/main',
     method: 'GET',
     timeout: 0,
   };

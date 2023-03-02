@@ -14,7 +14,7 @@ let createdEnded;
 
 const getDatas = (page) => {
   var settings = {
-    url: 'http://localhost:8080/api/posts',
+    url: 'http://3.37.11.74/api/posts',
     method: 'GET',
     timeout: 0,
     data: {
