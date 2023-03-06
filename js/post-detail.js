@@ -11,7 +11,7 @@ const postId = window.location.href.split('?id=')[1];
 
 document.addEventListener('DOMContentLoaded', function () {
   const postSettings = {
-    url: `http://3.35.0.88:8080/api/posts/${postId}`,
+    url: `http://13.209.25.67:8080/api/posts/${postId}`,
     method: 'GET',
     timeout: 0,
   };
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // 좋아요 여부 확인
   if (window.localStorage.getItem('accesstoken')) {
     var settings = {
-      url: `http://3.35.0.88:8080/api/likes/${postId}/check`,
+      url: `http://13.209.25.67:8080/api/likes/${postId}/check`,
       method: 'GET',
       timeout: 0,
       headers: {
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 const getLikeCnt = () => {
   var likeCntSettings = {
-    url: `http://3.35.0.88:8080/api/likes/${postId}`,
+    url: `http://13.209.25.67:8080/api/likes/${postId}`,
     method: 'GET',
     timeout: 0,
   };
@@ -103,7 +103,7 @@ $('.comment-pagination').on('click', 'a', function (e) {
 
 const getComments = (page) => {
   const commentSettings = {
-    url: `http://3.35.0.88:8080/api/post-comments/${postId}`,
+    url: `http://13.209.25.67:8080/api/post-comments/${postId}`,
     method: 'GET',
     timeout: 0,
     data: {
@@ -207,7 +207,7 @@ const addComment = () => {
     const content = document.getElementById('content').value;
 
     var createCommentSettings = {
-      url: `http://3.35.0.88:8080/api/post-comments/${postId}`,
+      url: `http://13.209.25.67:8080/api/post-comments/${postId}`,
       method: 'POST',
       timeout: 0,
       data: JSON.stringify({
@@ -223,7 +223,7 @@ const addComment = () => {
       document.getElementById('content').value = null;
 
       var commentSettings = {
-        url: `http://3.35.0.88:8080/api/post-comments/${postId}`,
+        url: `http://13.209.25.67:8080/api/post-comments/${postId}`,
         method: 'GET',
         timeout: 0,
         data: {
@@ -252,7 +252,7 @@ const moveToWritePage = () => {
 
 const deletePost = () => {
   const deletePostSettings = {
-    url: `http://3.35.0.88:8080/api/posts/${postId}`,
+    url: `http://13.209.25.67:8080/api/posts/${postId}`,
     method: 'DELETE',
     timeout: 0,
     headers: {
@@ -285,7 +285,7 @@ const showUnLikeBtn = () => {
 const like = () => {
   if (window.localStorage.getItem('accesstoken')) {
     var settings = {
-      url: `http://3.35.0.88:8080/api/likes/${postId}/like`,
+      url: `http://13.209.25.67:8080/api/likes/${postId}/like`,
       method: 'POST',
       timeout: 0,
       headers: {
@@ -305,7 +305,7 @@ const like = () => {
 const unlike = () => {
   if (window.localStorage.getItem('accesstoken')) {
     var settings = {
-      url: `http://3.35.0.88:8080/api/likes/${postId}/unlike`,
+      url: `http://13.209.25.67:8080/api/likes/${postId}/unlike`,
       method: 'DELETE',
       timeout: 0,
       headers: {
@@ -362,7 +362,7 @@ const updateComment = (postCommentId) => {
   ).value;
 
   var settings = {
-    url: `http://3.35.0.88:8080/api/post-comments/${postCommentId}`,
+    url: `http://13.209.25.67:8080/api/post-comments/${postCommentId}`,
     method: 'PUT',
     timeout: 0,
     headers: {
@@ -381,7 +381,7 @@ const updateComment = (postCommentId) => {
 
 const deleteComment = (postCommentId) => {
   var settings = {
-    url: `http://3.35.0.88:8080/api/post-comments/${postCommentId}`,
+    url: `http://13.209.25.67:8080/api/post-comments/${postCommentId}`,
     method: 'DELETE',
     timeout: 0,
     headers: {

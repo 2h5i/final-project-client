@@ -1,6 +1,6 @@
 function loginUser() {
   var settings = {
-    url: 'http://3.35.0.88:8080/api/auth/login',
+    url: 'http://13.209.25.67:8080/api/auth/login',
     method: 'POST',
     timeout: 0,
     headers: {
@@ -29,7 +29,7 @@ function kakaoLogin() {
   const code = window.localStorage.getItem('code');
   $.ajax({
     type: 'GET',
-    url: 'http://3.35.0.88:8080/api/auth/kakao-login',
+    url: 'http://13.209.25.67:8080/api/auth/kakao-login',
     data: {
       code,
     },

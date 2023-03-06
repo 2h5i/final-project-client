@@ -87,7 +87,7 @@ pwReInputEl.addEventListener('change', () => {
 
 function signupUser() {
   var settings = {
-    url: 'http://3.35.0.88:8080/api/auth/signup',
+    url: 'http://13.209.25.67:8080/api/auth/signup',
     method: 'POST',
     timeout: 0,
     headers: {
