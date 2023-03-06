@@ -40,8 +40,9 @@ document.addEventListener('DOMContentLoaded', function () {
     contentArea.innerHTML = response.content;
 
     if (
+      localStorage.getItem('accesstoken') &&
       response.userInfo.userId ===
-      parseJwt(localStorage.getItem('accesstoken')).sub
+        parseJwt(localStorage.getItem('accesstoken')).sub
     ) {
       const editBtn = document.getElementById('post-edit');
       const deleteBtn = document.getElementById('post-delete');
@@ -181,6 +182,7 @@ function comment_list(data) {
     str += `<span id="comment-content-${comment.postCommentId}">${comment.content}</span>`;
     str += `<span>${comment.createdAt.slice(0, 10)}</span>`;
     if (
+      localStorage.getItem('accesstoken') &&
       comment.user.userId === parseJwt(localStorage.getItem('accesstoken')).sub
     ) {
       str += `<span onclick="handleEditComment(${comment.postCommentId})">수정</span>`;
@@ -394,3 +396,27 @@ const deleteComment = (postCommentId) => {
     getComments(0);
   });
 };
+
+// 헤더
+const showHeader = () => {
+  const token = window.localStorage.getItem('accesstoken');
+  const logoutArea = document.querySelector('.logout-area');
+  const loginArea = document.querySelector('.login-area');
+
+  if (token) {
+    logoutArea.style.display = 'block';
+    loginArea.style.display = 'none';
+  } else {
+    logoutArea.style.display = 'none';
+    loginArea.style.display = 'block';
+  }
+};
+
+const logout = () => {
+  window.localStorage.removeItem('accesstoken');
+  window.localStorage.removeItem('refreshtoken');
+  alert('로그아웃 되었습니다.');
+  window.location.reload();
+};
+
+showHeader();

@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
         Authorization: window.localStorage.getItem('accesstoken'),
       },
     };
-  
+
     $.ajax(settings).done(function (response) {
       if (response) {
         showBookmarkBtn();
@@ -75,7 +75,6 @@ document.addEventListener('DOMContentLoaded', function () {
     showUnBookmarkBtn();
   }
 });
-
 
 // 페이징 버튼
 $('.comment-pagination').on('click', 'a', function (e) {
@@ -187,45 +186,44 @@ function comment_list(data) {
 // 코멘트 달기
 const addComment = () => {
   if (window.localStorage.getItem('accesstoken')) {
+    const content = document.getElementById('content').value;
 
-  const content = document.getElementById('content').value;
-
-  var createCommentSettings = {
-    url: `http://localhost:8080/api/recruitment-comments/${recruitmentId}`,
-    method: 'POST',
-    timeout: 0,
-    data: JSON.stringify({
-      content,
-    }),
-    headers: {
-      Authorization: window.localStorage.getItem('accesstoken'),
-      'Content-Type': 'application/json',
-    },
-  };
-
-  $.ajax(createCommentSettings).done(function (response) {
-    document.getElementById('content').value = null;
-
-    var commentSettings = {
+    var createCommentSettings = {
       url: `http://localhost:8080/api/recruitment-comments/${recruitmentId}`,
-      method: 'GET',
+      method: 'POST',
       timeout: 0,
-      data: {
-        page: page - 1,
-        size: VIEW_DATA,
+      data: JSON.stringify({
+        content,
+      }),
+      headers: {
+        Authorization: window.localStorage.getItem('accesstoken'),
+        'Content-Type': 'application/json',
       },
     };
-    $.ajax(commentSettings).done(function (response) {
-      const data = response.content;
 
-      TOTAL_DATA = response.totalElements;
-      TOTAL_PAGE = response.totalPages;
-      TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION);
-      comment_list(data);
+    $.ajax(createCommentSettings).done(function (response) {
+      document.getElementById('content').value = null;
+
+      var commentSettings = {
+        url: `http://localhost:8080/api/recruitment-comments/${recruitmentId}`,
+        method: 'GET',
+        timeout: 0,
+        data: {
+          page: page - 1,
+          size: VIEW_DATA,
+        },
+      };
+      $.ajax(commentSettings).done(function (response) {
+        const data = response.content;
+
+        TOTAL_DATA = response.totalElements;
+        TOTAL_PAGE = response.totalPages;
+        TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION);
+        comment_list(data);
+      });
     });
-  });
-  }else{
-    alert("로그인이 필요합니다.")
+  } else {
+    alert('로그인이 필요합니다.');
   }
 };
 
@@ -245,134 +243,161 @@ const showUnBookmarkBtn = () => {
   bookmark.style.display = 'none';
 };
 
-  const bookmark = () => {
-    if (window.localStorage.getItem('accesstoken')) {
-      var settings = {
-        url: `http://localhost:8080/api/bookmarks/${recruitmentId}/bookmark`,
-        method: 'POST',
-        timeout: 0,
-        headers: {
-          Authorization: window.localStorage.getItem('accesstoken'),
-        },
-      };
-  
-      $.ajax(settings).done(function (response) {
-        showBookmarkBtn();
-      });
-    } else {
-      alert('로그인 후 사용 가능합니다.');
-    }
-  };
-  
-  const unbookmark = () => {
-    if (window.localStorage.getItem('accesstoken')) {
-      var settings = {
-        url: `http://localhost:8080/api/bookmarks/${recruitmentId}/bookmark`,
-        method: 'DELETE',
-        timeout: 0,
-        headers: {
-          Authorization: window.localStorage.getItem('accesstoken'),
-        },
-      };
-  
-      $.ajax(settings).done(function (response) {
-        showUnBookmarkBtn();
-      });
-    } else {
-      alert('로그인 후 사용 가능합니다.');
-    }
-  };
-
-  const auth = () => {
-    if (window.localStorage.getItem('accesstoken')) {
-      location.href='/mypage.html';
-    }else{
-      alert("로그인이 필요합니다.");
-    }
-  }
-  
-  const handleEditComment = (recruitmentCommentId) => {
-    const commentPTag = document.getElementById(`recruitment-comment-${recruitmentCommentId}`);
-    commentPTag.style.display = 'none';
-    const commentInput = document.getElementById(
-      `recruitment-comment-edit-${recruitmentCommentId}`
-    );
-    commentInput.style.display = 'flex';
-  };
-  
-  const cancelEditcomment = (recruitmentCommentId) => {
-    const commentPTag = document.getElementById(`recruitment-comment-${recruitmentCommentId}`);
-    commentPTag.style.display = 'flex';
-    const commentInput = document.getElementById(
-      `recruitment-comment-edit-${recruitmentCommentId}`
-    );
-    commentInput.style.display = 'none';
-  };
-  
-  const updateComment = (recruitmentCommentId) => {
-    const comment = document.getElementById(
-      `update-comment-${recruitmentCommentId}`
-    ).value;
-  
+const bookmark = () => {
+  if (window.localStorage.getItem('accesstoken')) {
     var settings = {
-      url: `http://localhost:8080/api/recruitment-comments/${recruitmentCommentId}`,
-      method: 'PUT',
+      url: `http://localhost:8080/api/bookmarks/${recruitmentId}/bookmark`,
+      method: 'POST',
       timeout: 0,
       headers: {
         Authorization: window.localStorage.getItem('accesstoken'),
-        'Content-Type': 'application/json',
       },
-      data: JSON.stringify({
-        content: comment,
-      }),
     };
-  
+
     $.ajax(settings).done(function (response) {
-      getComments(page - 1);
+      showBookmarkBtn();
     });
-  };
-  
-  const deleteComment = (recruitmentCommentId) => {
+  } else {
+    alert('로그인 후 사용 가능합니다.');
+  }
+};
+
+const unbookmark = () => {
+  if (window.localStorage.getItem('accesstoken')) {
     var settings = {
-      url: `http://localhost:8080/api/recruitment-comments/${recruitmentCommentId}`,
+      url: `http://localhost:8080/api/bookmarks/${recruitmentId}/bookmark`,
       method: 'DELETE',
       timeout: 0,
       headers: {
         Authorization: window.localStorage.getItem('accesstoken'),
       },
     };
-  
+
     $.ajax(settings).done(function (response) {
-      page = 1;
-      getComments(0);
+      showUnBookmarkBtn();
     });
-  };
-  
-  const parseJwt = (token) => {
-    try {
-      return JSON.parse(atob(token.split('.')[1]));
-    } catch (e) {
-      return null;
-    }
+  } else {
+    alert('로그인 후 사용 가능합니다.');
+  }
+};
+
+const auth = () => {
+  if (window.localStorage.getItem('accesstoken')) {
+    location.href = '/mypage.html';
+  } else {
+    alert('로그인이 필요합니다.');
+  }
+};
+
+const handleEditComment = (recruitmentCommentId) => {
+  const commentPTag = document.getElementById(
+    `recruitment-comment-${recruitmentCommentId}`
+  );
+  commentPTag.style.display = 'none';
+  const commentInput = document.getElementById(
+    `recruitment-comment-edit-${recruitmentCommentId}`
+  );
+  commentInput.style.display = 'flex';
+};
+
+const cancelEditcomment = (recruitmentCommentId) => {
+  const commentPTag = document.getElementById(
+    `recruitment-comment-${recruitmentCommentId}`
+  );
+  commentPTag.style.display = 'flex';
+  const commentInput = document.getElementById(
+    `recruitment-comment-edit-${recruitmentCommentId}`
+  );
+  commentInput.style.display = 'none';
+};
+
+const updateComment = (recruitmentCommentId) => {
+  const comment = document.getElementById(
+    `update-comment-${recruitmentCommentId}`
+  ).value;
+
+  var settings = {
+    url: `http://localhost:8080/api/recruitment-comments/${recruitmentCommentId}`,
+    method: 'PUT',
+    timeout: 0,
+    headers: {
+      Authorization: window.localStorage.getItem('accesstoken'),
+      'Content-Type': 'application/json',
+    },
+    data: JSON.stringify({
+      content: comment,
+    }),
   };
 
+  $.ajax(settings).done(function (response) {
+    getComments(page - 1);
+  });
+};
 
-  const getComments = (page) => {
-    const commentSettings = {
-      url: `http://localhost:8080/api/recruitment-comments/${recruitmentId}`,
-      method: 'GET',
-      timeout: 0,
-      data: {
-        page: page,
-        size: VIEW_DATA,
-      },
-    };
-  
-    $.ajax(commentSettings).done(function (response) {
-      const data = response.content;
-      TOTAL_DATA = response.totalElements;
-      TOTAL_PAGE = response.totalPages;
-      TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION);
-      comment_list(data);
-    });
+const deleteComment = (recruitmentCommentId) => {
+  var settings = {
+    url: `http://localhost:8080/api/recruitment-comments/${recruitmentCommentId}`,
+    method: 'DELETE',
+    timeout: 0,
+    headers: {
+      Authorization: window.localStorage.getItem('accesstoken'),
+    },
   };
+
+  $.ajax(settings).done(function (response) {
+    page = 1;
+    getComments(0);
+  });
+};
+
+const parseJwt = (token) => {
+  try {
+    return JSON.parse(atob(token.split('.')[1]));
+  } catch (e) {
+    return null;
+  }
+};
+
+const getComments = (page) => {
+  const commentSettings = {
+    url: `http://localhost:8080/api/recruitment-comments/${recruitmentId}`,
+    method: 'GET',
+    timeout: 0,
+    data: {
+      page: page,
+      size: VIEW_DATA,
+    },
+  };
+
+  $.ajax(commentSettings).done(function (response) {
+    const data = response.content;
+    TOTAL_DATA = response.totalElements;
+    TOTAL_PAGE = response.totalPages;
+    TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION);
+    comment_list(data);
+  });
+};
+
+// 헤더
+const showHeader = () => {
+  const token = window.localStorage.getItem('accesstoken');
+  const logoutArea = document.querySelector('.logout-area');
+  const loginArea = document.querySelector('.login-area');
+
+  if (token) {
+    logoutArea.style.display = 'block';
+    loginArea.style.display = 'none';
+  } else {
+    logoutArea.style.display = 'none';
+    loginArea.style.display = 'block';
+  }
+};
+
+const logout = () => {
+  window.localStorage.removeItem('accesstoken');
+  window.localStorage.removeItem('refreshtoken');
+  alert('로그아웃 되었습니다.');
+  window.location.reload();
+};
+
+showHeader();

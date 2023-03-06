@@ -11,27 +11,27 @@ let title = document.getElementById('title').value;
 let content = document.getElementById('content').value;
 
 const getDatas = (page) => {
-    var settings = {
-        url: 'http://localhost:8080/api/recruitments',
-        method: 'GET',
-        timeout: 0,
-        data: {
-          page,
-          size: VIEW_DATA,
-          title,
-          content,
-        },
-      };
-    
-      $.ajax(settings).done(function (response) {
-        data = response.content;
-    
-        TOTAL_DATA = response.totalElements;
-        TOTAL_PAGE = response.totalPages;
-        TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION);
-        board_list(data);
-      });
-}
+  var settings = {
+    url: 'http://localhost:8080/api/recruitments',
+    method: 'GET',
+    timeout: 0,
+    data: {
+      page,
+      size: VIEW_DATA,
+      title,
+      content,
+    },
+  };
+
+  $.ajax(settings).done(function (response) {
+    data = response.content;
+
+    TOTAL_DATA = response.totalElements;
+    TOTAL_PAGE = response.totalPages;
+    TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION);
+    board_list(data);
+  });
+};
 
 document.addEventListener('DOMContentLoaded', function () {
   getDatas(0);
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // 페이징 버튼
 $('.post-data-area').on('click', 'a', function (e) {
   page = parseInt($(this).data('page'));
-  getDatas(page-1);
+  getDatas(page - 1);
   return false;
 });
 
@@ -93,7 +93,7 @@ function board_list(data) {
     str += `<tr>`;
     str += `<td>${recruitment.title}</td>`;
     str += `<td>${recruitment.subTitle}</td>`;
-    str += `<td>${recruitment.createdAt}</td>`.slice(0,14);
+    str += `<td>${recruitment.createdAt}</td>`.slice(0, 14);
     str += `<td><button style="background-color: #ffffff6b; font-weight: bold" onclick="location.href='/recruitment-detail.html?id=${recruitment.id}'">상세보기</button></td>`;
     str += '</tr>';
   });
@@ -105,16 +105,39 @@ function board_list(data) {
 }
 
 const searchPost = () => {
-    title = document.getElementById('title').value;
-    content = document.getElementById('content').value;
-    getDatas(0);
-  };
-  
+  title = document.getElementById('title').value;
+  content = document.getElementById('content').value;
+  getDatas(0);
+};
+
 const auth = () => {
-    if (window.localStorage.getItem('accesstoken')) {
-      location.href='/mypage.html';
-    }else{
-      alert("로그인이 필요합니다.");
-    }
-}
-  
+  if (window.localStorage.getItem('accesstoken')) {
+    location.href = '/mypage.html';
+  } else {
+    alert('로그인이 필요합니다.');
+  }
+};
+
+// 헤더
+const showHeader = () => {
+  const token = window.localStorage.getItem('accesstoken');
+  const logoutArea = document.querySelector('.logout-area');
+  const loginArea = document.querySelector('.login-area');
+
+  if (token) {
+    logoutArea.style.display = 'block';
+    loginArea.style.display = 'none';
+  } else {
+    logoutArea.style.display = 'none';
+    loginArea.style.display = 'block';
+  }
+};
+
+const logout = () => {
+  window.localStorage.removeItem('accesstoken');
+  window.localStorage.removeItem('refreshtoken');
+  alert('로그아웃 되었습니다.');
+  window.location.reload();
+};
+
+showHeader();
