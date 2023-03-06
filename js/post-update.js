@@ -28,7 +28,7 @@ const postId = window.location.href.split('?id=')[1];
 
 document.addEventListener('DOMContentLoaded', function () {
   const postSettings = {
-    url: `http://3.37.11.74:8080/api/posts/${postId}`,
+    url: `http://3.35.0.88:8080/api/posts/${postId}`,
     method: 'GET',
     timeout: 0,
   };
@@ -46,7 +46,7 @@ const updatePost = () => {
   const content = quill.root.innerHTML;
 
   var settings = {
-    url: `http://3.37.11.74:8080/api/posts/${postId}`,
+    url: `http://3.35.0.88:8080/api/posts/${postId}`,
     method: 'PUT',
     timeout: 0,
     headers: {

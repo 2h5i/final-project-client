@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
   var settings = {
-    url: 'http://3.37.11.74:8080/api/recruitments/main',
+    url: 'http://3.35.0.88:8080/api/recruitments/main',
     method: 'GET',
     timeout: 0,
   };

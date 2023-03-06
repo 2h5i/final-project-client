@@ -11,7 +11,7 @@ const recruitmentId = window.location.href.split('?id=')[1];
 
 document.addEventListener('DOMContentLoaded', function () {
   const recruitmentSettings = {
-    url: `http://3.37.11.74:8080/api/recruitments/${recruitmentId}`,
+    url: `http://3.35.0.88:8080/api/recruitments/${recruitmentId}`,
     method: 'GET',
     timeout: 0,
   };
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   const commentSettings = {
-    url: `http://3.37.11.74:8080/api/recruitment-comments/${recruitmentId}`,
+    url: `http://3.35.0.88:8080/api/recruitment-comments/${recruitmentId}`,
     method: 'GET',
     timeout: 0,
     data: {
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (window.localStorage.getItem('accesstoken')) {
     var settings = {
-      url: `http://3.37.11.74:8080/api/bookmarks/${recruitmentId}/check`,
+      url: `http://3.35.0.88:8080/api/bookmarks/${recruitmentId}/check`,
       method: 'GET',
       timeout: 0,
       headers: {
@@ -82,7 +82,7 @@ $('.comment-pagination').on('click', 'a', function (e) {
   page = parseInt($(this).data('page'));
 
   var commentSettings = {
-    url: `http://3.37.11.74:8080/api/recruitment-comments/${recruitmentId}`,
+    url: `http://3.35.0.88:8080/api/recruitment-comments/${recruitmentId}`,
     method: 'GET',
     timeout: 0,
     data: {
@@ -191,7 +191,7 @@ const addComment = () => {
   const content = document.getElementById('content').value;
 
   var createCommentSettings = {
-    url: `http://3.37.11.74:8080/api/recruitment-comments/${recruitmentId}`,
+    url: `http://3.35.0.88:8080/api/recruitment-comments/${recruitmentId}`,
     method: 'POST',
     timeout: 0,
     data: JSON.stringify({
@@ -207,7 +207,7 @@ const addComment = () => {
     document.getElementById('content').value = null;
 
     var commentSettings = {
-      url: `http://3.37.11.74:8080/api/recruitment-comments/${recruitmentId}`,
+      url: `http://3.35.0.88:8080/api/recruitment-comments/${recruitmentId}`,
       method: 'GET',
       timeout: 0,
       data: {
@@ -248,7 +248,7 @@ const showUnBookmarkBtn = () => {
   const bookmark = () => {
     if (window.localStorage.getItem('accesstoken')) {
       var settings = {
-        url: `http://3.37.11.74:8080/api/bookmarks/${recruitmentId}/bookmark`,
+        url: `http://3.35.0.88:8080/api/bookmarks/${recruitmentId}/bookmark`,
         method: 'POST',
         timeout: 0,
         headers: {
@@ -267,7 +267,7 @@ const showUnBookmarkBtn = () => {
   const unbookmark = () => {
     if (window.localStorage.getItem('accesstoken')) {
       var settings = {
-        url: `http://3.37.11.74:8080/api/bookmarks/${recruitmentId}/bookmark`,
+        url: `http://3.35.0.88:8080/api/bookmarks/${recruitmentId}/bookmark`,
         method: 'DELETE',
         timeout: 0,
         headers: {
@@ -315,7 +315,7 @@ const showUnBookmarkBtn = () => {
     ).value;
   
     var settings = {
-      url: `http://3.37.11.74:8080/api/recruitment-comments/${recruitmentCommentId}`,
+      url: `http://3.35.0.88:8080/api/recruitment-comments/${recruitmentCommentId}`,
       method: 'PUT',
       timeout: 0,
       headers: {
@@ -334,7 +334,7 @@ const showUnBookmarkBtn = () => {
   
   const deleteComment = (recruitmentCommentId) => {
     var settings = {
-      url: `http://3.37.11.74:8080/api/recruitment-comments/${recruitmentCommentId}`,
+      url: `http://3.35.0.88:8080/api/recruitment-comments/${recruitmentCommentId}`,
       method: 'DELETE',
       timeout: 0,
       headers: {
@@ -359,7 +359,7 @@ const showUnBookmarkBtn = () => {
 
   const getComments = (page) => {
     const commentSettings = {
-      url: `http://3.37.11.74:8080/api/recruitment-comments/${recruitmentId}`,
+      url: `http://3.35.0.88:8080/api/recruitment-comments/${recruitmentId}`,
       method: 'GET',
       timeout: 0,
       data: {
