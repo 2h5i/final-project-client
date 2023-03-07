@@ -32,6 +32,10 @@
   list-style: none;
 }
 
+.comment-content {
+  width: 50%;
+}
+
 /* 페이징 */
 .comment-pagination {
   margin: 0 auto;

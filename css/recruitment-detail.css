@@ -1,77 +1,80 @@
 .recruitment-details-wrapper {
-    padding-top: 50px;
-  }
-  
-  .comment-area {
-    margin-top: 30px;
-  }
-  
+  padding-top: 50px;
+}
 
-  #recruitment-detail-content {
-    margin-top: 30px;
-  }
-  
-  .comment-list-item {
-    display: flex;
-    justify-content: space-between;
-    border: 1px solid white;
-    margin: 0px;
-    padding: 10px;
-  }
-  
-  .comment-list {
-    list-style: none;
-  }
-  
-  /* 페이징 */
-  .comment-pagination {
-    margin: 0 auto;
-    padding: 40px 0;
-    text-align: center;
-    font-size: 0;
-  }
-  .comment-pagination .current {
-    color: #00f;
-    font-weight: bold;
-  }
-  .comment-pagination a {
-    display: inline-block;
-    padding: 5px;
-    border: 1px solid #000;
-    font-size: 12px;
-  }
-  .comment-pagination a + a {
-    margin-left: 5px;
-  }
-  .comment-pagination a.on {
-    color: #f00;
-  }
-  
-  #recruitment-detail-title {
-    font-size: 30px;
-  }
-  
-  .comment-create-area {
-    border: 1px solid white;
-    border-radius: 5px;
-    width: 100%;
-    height: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    margin-bottom: 20px;
-  }
-  
-  #content {
-    width: 80%;
-  }
-  
-  .btn{
-    cursor: pointer;
-  }
+.comment-area {
+  margin-top: 30px;
+}
 
-  .bookmark-box{
-    display: flex;
-    justify-content: center;
-  }
+#recruitment-detail-content {
+  margin-top: 30px;
+}
+
+.comment-list-item {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid white;
+  margin: 0px;
+  padding: 10px;
+}
+
+.comment-list {
+  list-style: none;
+}
+
+.comment-content {
+  width: 50%;
+}
+
+/* 페이징 */
+.comment-pagination {
+  margin: 0 auto;
+  padding: 40px 0;
+  text-align: center;
+  font-size: 0;
+}
+.comment-pagination .current {
+  color: #00f;
+  font-weight: bold;
+}
+.comment-pagination a {
+  display: inline-block;
+  padding: 5px;
+  border: 1px solid #000;
+  font-size: 12px;
+}
+.comment-pagination a + a {
+  margin-left: 5px;
+}
+.comment-pagination a.on {
+  color: #f00;
+}
+
+#recruitment-detail-title {
+  font-size: 30px;
+}
+
+.comment-create-area {
+  border: 1px solid white;
+  border-radius: 5px;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+#content {
+  width: 80%;
+}
+
+.btn {
+  cursor: pointer;
+}
+
+.bookmark-box {
+  display: flex;
+  justify-content: center;
+}

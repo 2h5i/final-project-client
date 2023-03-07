@@ -179,7 +179,7 @@ function comment_list(data) {
     str += '<li>';
     str += `<p class="comment-list-item" id="post-comment-${comment.postCommentId}">`;
     str += `<span class="commnet">${comment.user.userId}</span>`;
-    str += `<span id="comment-content-${comment.postCommentId}">${comment.content}</span>`;
+    str += `<span id="comment-content-${comment.postCommentId}" class="comment-content">${comment.content}</span>`;
     str += `<span>${comment.createdAt.slice(0, 10)}</span>`;
     if (
       localStorage.getItem('accesstoken') &&
