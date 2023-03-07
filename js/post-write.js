@@ -42,9 +42,13 @@ const writePost = () => {
     }),
   };
 
-  $.ajax(settings).done(function (response) {
-    window.location.href = `/post-detail.html?id=${response}`;
-  });
+  $.ajax(settings)
+    .done(function (response) {
+      window.location.href = `/post-detail.html?id=${response}`;
+    })
+    .fail(function (response) {
+      alert(response.responseJSON.message);
+    });
 };
 
 const auth = () => {

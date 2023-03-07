@@ -201,27 +201,31 @@ const addComment = () => {
       },
     };
 
-    $.ajax(createCommentSettings).done(function (response) {
-      document.getElementById('content').value = null;
+    $.ajax(createCommentSettings)
+      .done(function (response) {
+        document.getElementById('content').value = null;
 
-      var commentSettings = {
-        url: `http://localhost:8080/api/recruitment-comments/${recruitmentId}`,
-        method: 'GET',
-        timeout: 0,
-        data: {
-          page: page - 1,
-          size: VIEW_DATA,
-        },
-      };
-      $.ajax(commentSettings).done(function (response) {
-        const data = response.content;
+        var commentSettings = {
+          url: `http://localhost:8080/api/recruitment-comments/${recruitmentId}`,
+          method: 'GET',
+          timeout: 0,
+          data: {
+            page: page - 1,
+            size: VIEW_DATA,
+          },
+        };
+        $.ajax(commentSettings).done(function (response) {
+          const data = response.content;
 
-        TOTAL_DATA = response.totalElements;
-        TOTAL_PAGE = response.totalPages;
-        TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION);
-        comment_list(data);
+          TOTAL_DATA = response.totalElements;
+          TOTAL_PAGE = response.totalPages;
+          TOTAL_SECTION = Math.ceil(TOTAL_PAGE / VIEW_SECTION);
+          comment_list(data);
+        });
+      })
+      .fail(function (response) {
+        alert(response.responseJSON.message);
       });
-    });
   } else {
     alert('로그인이 필요합니다.');
   }
@@ -329,9 +333,13 @@ const updateComment = (recruitmentCommentId) => {
     }),
   };
 
-  $.ajax(settings).done(function (response) {
-    getComments(page - 1);
-  });
+  $.ajax(settings)
+    .done(function (response) {
+      getComments(page - 1);
+    })
+    .fail(function (response) {
+      alert(response.responseJSON.message);
+    });
 };
 
 const deleteComment = (recruitmentCommentId) => {
