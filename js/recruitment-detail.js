@@ -160,7 +160,7 @@ function comment_list(data) {
     str += '<li>';
     str += `<p class="comment-list-item" id="recruitment-comment-${comment.recruitmentCommentId}">`;
     str += `<span class="commnet">${comment.user.userId}</span>`;
-    str += `<span>${comment.content}</span>`;
+    str += `<span class="comment-content">${comment.content}</span>`;
     str += `<span>${comment.createdAt.slice(0, 10)}</span>`;
     if (
       comment.user.userId === parseJwt(localStorage.getItem('accesstoken')).sub
