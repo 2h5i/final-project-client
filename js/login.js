@@ -11,18 +11,25 @@ function loginUser() {
       password: $('#userPassword').val(),
     }),
   };
-  $.ajax(settings).done(function (response, status, request) {
-    window.localStorage.setItem(
-      'accesstoken',
-      request.getResponseHeader('Authorization')
-    );
 
-    alert('로그인이 완료되었습니다.');
-    window.location.href = 'index.html';
-  });
-  $.ajax(settings).fail(function (response, status, request) {
-    alert('아이디 및 비밀번호를 확인해주세요');
-  });
+  $.ajax(settings)
+    .done(function (response, status, request) {
+      window.localStorage.setItem(
+        'accesstoken',
+        request.getResponseHeader('Authorization')
+      );
+      window.localStorage.setItem(
+        'refreshtoken',
+        request.getResponseHeader('Refresh')
+      );
+
+      alert('로그인이 완료되었습니다.');
+
+      window.location.href = 'index.html';
+    })
+    .fail(function (response, status, request) {
+      alert('아이디 및 비밀번호를 확인해주세요');
+    });
 }
 
 function kakaoLogin() {
