@@ -99,10 +99,12 @@ function signupUser() {
       email: $('#email-txt').val(),
     }),
   };
-  $.ajax(settings).done(function () {
-    alert('회원가입이 완료되었습니다.');
-    window.location.href = 'login.html';
-  }).fail(function () {
-    alert('아이디를 확인해주세요.');
-  });
+  $.ajax(settings)
+    .done(function () {
+      alert('회원가입이 완료되었습니다.');
+      window.location.href = 'login.html';
+    })
+    .fail(function (response) {
+      alert(response.responseJSON.message);
+    });
 }
