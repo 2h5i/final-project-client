@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const liDiv = document.createElement('div');
 
       liDiv.innerHTML = `<div class="recruitment-title">${recruitment.title}</div> 
-                        <div class="recruitment-subtitle"> ${recruitment.sub_title}</div>`;
+                        <div class="recruitment-subtitle"> ${recruitment.subTitle}</div>`;
 
       li.setAttribute('id', recruitment.id);
       liDiv.setAttribute('class', 'recruitment-div');
